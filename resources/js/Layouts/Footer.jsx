@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex gap-12 justify-center lg:px-10 p-2 lg:py-4 text-sm">
-        <a ariaLabel="link https://www.facebook.com/GESPASAFluidTec" href="#">
+        <a aria-label="link https://www.facebook.com/GESPASAFluidTec" href="#">
           <svg
             width="28"
             height="28"
@@ -101,7 +101,7 @@ export default function Footer() {
             ></path>
           </svg>
         </a>
-        <a ariaLabel="link https://twitter.com/GespasaFluidTec" href="#">
+        <a aria-label="link https://twitter.com/GespasaFluidTec" href="#">
           <svg
             width="28"
             height="28"
@@ -116,7 +116,7 @@ export default function Footer() {
           </svg>
         </a>
         <a
-          ariaLabel="link https://www.linkedin.com/company/totcomercial/mycompany/?viewAsMember=true"
+          aria-label="link https://www.linkedin.com/company/totcomercial/mycompany/?viewAsMember=true"
           href="#"
         >
           <svg
@@ -138,7 +138,7 @@ export default function Footer() {
             </g>
           </svg>
         </a>
-        <a ariaLabel="link https://www.youtube.com/user/InfoGespasa" href="#">
+        <a aria-label="link https://www.youtube.com/user/InfoGespasa" href="#">
           <svg
             width="28"
             height="28"

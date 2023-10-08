@@ -1,6 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DistributorController;
+use App\Http\Controllers\Admin\DownloadController;
+use App\Http\Controllers\Admin\Pages\PageController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\Product\PproductController;
+use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\Product\WproductController;
+use App\Http\Controllers\Admin\SiteContent\SitecontentController;
+use App\Http\Controllers\Admin\Slide\SliderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,14 +27,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [WebsiteController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -35,4 +39,41 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+
+Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
+    Route::get("/", [SitecontentController::class, 'index']);
+
+    Route::post("/reorder", [AdminController::class, "reorder"])->name("reorder");
+    Route::post("/preorder", [AdminController::class, "preorder"])->name(
+        "preorder"
+    );
+    Route::post("/delimg", [AdminController::class, "delimg"])->name("delimg");
+    Route::post("/delimgpost", [AdminController::class, "delimgpost"])->name(
+        "delimg_post"
+    );
+    Route::post("/upload/img", [AdminController::class, "upload_img"]);
+
+    Route::resource("slider", SliderController::class);
+    Route::resource("posts", PostController::class);
+    Route::resource("sitecontent", SitecontentController::class);
+    Route::resource("products", ProductController::class);
+    Route::resource("wproducts", WproductController::class);
+    Route::resource("pproducts", PproductController::class);
+    Route::post("/wdelimg", [AdminController::class, "wdelimg"])->name("wdelimg");
+    Route::post("/pdelimg", [AdminController::class, "pdelimg"])->name("pdelimg");
+
+    Route::resource("/pages", PageController::class);
+    Route::get("/pages-video", [PageController::class, "video"])->name(
+        "pages.video"
+    );
+
+    Route::resource("downloads", DownloadController::class);
+    Route::resource("posts", PostController::class);
+    Route::resource("distributors", DistributorController::class);
+
+    Route::get("/feedbacks", [AdminController::class, "feedbacks"])->name(
+        "feedbacks.index"
+    );
+});

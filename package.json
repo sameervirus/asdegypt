@@ -29,6 +29,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "react-responsive-carousel": "^3.2.23",
         "react-sliding-side-panel": "^2.0.3"
     }
 }
