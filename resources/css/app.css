@@ -89,3 +89,16 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid #e1001a !important;
+}
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #e1001a !important;
+}
+
+.home-about h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}

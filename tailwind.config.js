@@ -13,6 +13,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {},
+      colors: {
+        primary: "#e1001a",
+        secondary: "#19191d",
+      },
     },
   },
 

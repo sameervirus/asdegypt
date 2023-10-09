@@ -23,7 +23,6 @@ function toTitleCase(str) {
 export default function MainMenu() {
   const { products } = usePage().props;
   const categories = getDistinctObjects(products);
-  console.log(categories);
   return (
     <>
       <ul className="menu-top flex me-10">
