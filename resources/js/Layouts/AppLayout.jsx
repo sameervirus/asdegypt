@@ -3,6 +3,7 @@ import Header from "./Header";
 import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
 import Footer from "./Footer";
+import MobileMenu from "./MobileMenu";
 
 export default function AppLayout({ children }) {
   const [menuPanel, setMenuPanel] = useState(false);
@@ -33,9 +34,8 @@ export default function AppLayout({ children }) {
           size={100}
           backdropClicked={() => setMenuPanel(false)}
         >
-          <div className="panel-container">
-            <div>My Panel Menu</div>
-            <button onClick={() => setMenuPanel(false)}>close</button>
+          <div className="panel-container !justify-start">
+            <MobileMenu setMenuPanel={setMenuPanel} />
           </div>
         </SlidingPanel>
       </div>

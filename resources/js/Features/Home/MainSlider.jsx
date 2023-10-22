@@ -16,7 +16,7 @@ export default function MainSlider({ sliders }) {
         showThumbs={false}
       >
         {sliders?.map((slide) => (
-          <div key={slide.id} className="grid grid-cols-2 gap-4">
+          <div key={slide.id} className="grid lg:grid-cols-2 lg:gap-4">
             <div className="mt-[70px] lg:mt-[140px] ms-[40px] lg:ms-[70px] p-10 text-start">
               <h2 className="text-xl lg:text-4xl uppercase mb-4">
                 {slide.header}

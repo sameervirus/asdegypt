@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: "Segoe UI", sans-serif;
+}
+
 .menu-top li {
   float: left;
   margin: 0 !important;
@@ -98,7 +102,36 @@
 }
 
 .home-about h1 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.home-about p {
+  font-size: 1rem;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.mobile-menu li a {
+  display: block;
+  padding: 8px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 768px) {
+  .home-about h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  .home-about p {
+    font-size: 1.5rem;
+  }
 }
