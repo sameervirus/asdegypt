@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background: #e1001a;
+  color: #fff;
+  text-shadow: none;
+}
+
 body {
   font-family: "Segoe UI", sans-serif;
 }
@@ -134,4 +140,30 @@ body {
   .home-about p {
     font-size: 1.5rem;
   }
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: #555;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.breadcrumb li:nth-child(n + 2)::before {
+  content: "/";
+  margin: 0 4px 0 5px;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.about-tabs li button {
+  background-color: #f2f2f2;
+}
+
+.about-tabs li.active button {
+  padding-bottom: 15px;
+  color: white;
+  background-color: #e1001a;
 }

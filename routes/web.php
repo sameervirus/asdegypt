@@ -28,6 +28,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [WebsiteController::class, 'index']);
+Route::get('/about', [WebsiteController::class, 'about']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

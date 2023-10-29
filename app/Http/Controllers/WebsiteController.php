@@ -17,4 +17,9 @@ class WebsiteController extends Controller
             'pages' => Page::all()
         ]);
     }
+
+    public function about()
+    {
+        return Inertia::render('About');
+    }
 }
