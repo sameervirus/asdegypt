@@ -7,7 +7,7 @@ export default function Breadcrumb({ title, items }) {
       <ul className="breadcrumb">
         {items &&
           items.map((item) => (
-            <li>
+            <li key={item.name}>
               <a href={item.url}>{item.name}</a>
             </li>
           ))}
