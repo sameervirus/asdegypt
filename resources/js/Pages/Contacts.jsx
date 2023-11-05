@@ -16,8 +16,6 @@ export default function Contacts() {
 
   const { data } = usePage().props;
 
-  console.log(data);
-
   return (
     <>
       <Head title="Al Arabia for Service Development" />

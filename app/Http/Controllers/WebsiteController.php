@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin\Pages\Page;
+use App\Admin\Product\Product;
 use App\Admin\SiteContent\Sitecontent;
 use App\Admin\Slide\Slider;
 use Illuminate\Http\Request;
@@ -31,6 +32,14 @@ class WebsiteController extends Controller
             $site_content = Sitecontent::where('lang', $locale)->pluck('content', 'code');
         return Inertia::render('Contacts', [
             'data' => $site_content
+        ]);
+    }
+
+    public function agents($agent)
+    {
+        $agent_products = Product::where('agent', $agent)->get();
+        return Inertia::render('Products/Category', [
+            'agent_products' => $agent_products
         ]);
     }
 }

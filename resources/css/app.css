@@ -159,12 +159,61 @@ body {
   color: #999;
 }
 
-.about-tabs li button {
+.about-tabs li button,
+.about-tabs li a {
   background-color: #f2f2f2;
 }
 
-.about-tabs li.active button {
+.about-tabs li.active button,
+.about-tabs li.active a {
   padding-bottom: 15px;
-  color: white;
+}
+.about-tabs li a.lavor {
+  background-color: #40525c;
+  color: #fff;
+}
+.about-tabs li a.fimer,
+.about-tabs li a.shamal {
   background-color: #e1001a;
+  color: #fff;
+}
+.about-tabs li a.piusi {
+  background-color: #e1001a;
+  color: #fff;
+}
+.about-tabs li a.cp {
+  background-color: #b50900;
+  color: #fff;
+}
+.about-tabs li a.faicom {
+  background-color: #009640;
+  color: #000;
+}
+.about-tabs li a.hazet {
+  background-color: #f4ca04;
+  color: #000;
+}
+.about-tabs li a.mazzola {
+  background-color: #f2f2f2;
+  color: #000;
+}
+.about-tabs li a.stayer {
+  background-color: #e31f1a;
+  color: #fff;
+}
+.about-tabs li a.teco {
+  background-color: #00561c;
+  color: #fff;
+}
+.about-tabs li a.startek {
+  background-color: #376838;
+  color: #fff;
+}
+.about-tabs li a.ital_garage {
+  background-color: #4e5db6;
+  color: #fff;
+}
+.about-tabs li a.hawk {
+  background-color: #d10a10;
+  color: #fff;
 }
