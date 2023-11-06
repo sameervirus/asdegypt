@@ -37,8 +37,8 @@ class WebsiteController extends Controller
 
     public function agents($agent)
     {
-        $agent_products = Product::where('agent', $agent)->get();
-        return Inertia::render('Products/Category', [
+        $agent_products = Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get();
+        return Inertia::render('Products/Agent', [
             'agent_products' => $agent_products
         ]);
     }

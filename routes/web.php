@@ -30,7 +30,7 @@ use Inertia\Inertia;
 Route::get('/', [WebsiteController::class, 'index']);
 Route::get('/about', [WebsiteController::class, 'about']);
 Route::get('/contact-us', [WebsiteController::class, 'contacts']);
-Route::get('/products/{agent}', [WebsiteController::class, 'agents'])->name('agents');
+Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
