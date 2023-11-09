@@ -31,6 +31,8 @@ Route::get('/', [WebsiteController::class, 'index']);
 Route::get('/about', [WebsiteController::class, 'about']);
 Route::get('/contact-us', [WebsiteController::class, 'contacts']);
 Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
+Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
+Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

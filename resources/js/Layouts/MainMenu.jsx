@@ -1,24 +1,6 @@
 import React from "react";
 import { usePage } from "@inertiajs/react";
-
-function getDistinctObjects(array) {
-  const uniqueIds = new Set();
-  return array.filter((obj) => {
-    if (!uniqueIds.has(obj.agent)) {
-      uniqueIds.add(obj.agent);
-      return true;
-    }
-    return false;
-  });
-}
-
-function toTitleCase(str) {
-  return str
-    .split("_")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ")
-    .trim();
-}
+import { getDistinctObjects, toTitleCase } from "@/Util/Helpers";
 
 export default function MainMenu() {
   const { products } = usePage().props;

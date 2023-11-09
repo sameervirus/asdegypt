@@ -8,3 +8,22 @@ export const capitalizeEachWord = (str) => {
   );
   return capitalizedWords.join(" ");
 };
+
+export const toTitleCase = (str) => {
+  return str
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+    .trim();
+};
+
+export const getDistinctObjects = (array) => {
+  const uniqueIds = new Set();
+  return array.filter((obj) => {
+    if (!uniqueIds.has(obj.agent)) {
+      uniqueIds.add(obj.agent);
+      return true;
+    }
+    return false;
+  });
+};
