@@ -1,5 +1,5 @@
 import React from "react";
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { getDistinctObjects, toTitleCase } from "@/Util/Helpers";
 
 export default function MainMenu() {
@@ -9,35 +9,35 @@ export default function MainMenu() {
     <>
       <ul className="menu-top flex me-10">
         <li>
-          <a href="/products">Products</a>
+          <Link href="/products">Products</Link>
           <div>
             <ul>
               {categories?.map((category) => (
                 <li key={category.id}>
-                  <a href="/en/products/fuel.html">
+                  <Link href={`/products/${category.agent}`}>
                     {toTitleCase(category.agent)}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </li>
         <li>
-          <a href="/products">News</a>
+          <Link href="/products">News</Link>
         </li>
         <li>
-          <a href="/products">Reference</a>
+          <Link href="/products">Reference</Link>
         </li>
       </ul>
       <ul className="menu-top flex">
         <li>
-          <a href="/products">Distributors</a>
+          <Link href="/products">Distributors</Link>
         </li>
         <li>
-          <a href="/products">About</a>
+          <Link href="/products">About</Link>
         </li>
         <li>
-          <a href="/products">Contact</a>
+          <Link href="/products">Contact</Link>
         </li>
       </ul>
     </>

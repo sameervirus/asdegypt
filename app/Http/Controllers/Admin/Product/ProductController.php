@@ -97,10 +97,10 @@ class ProductController extends Controller
      * @param  \App\Admin\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($category)
+    public function show($agent)
     {
         return view('admin.products.products', [
-            'products' => Product::where('category', $category)->orderBy('sort_order')->get()
+            'products' => Product::where('agent', $agent)->orderBy('sort_order')->get()
         ]); 
     }
 

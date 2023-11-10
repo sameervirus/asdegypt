@@ -5,14 +5,11 @@ use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\DownloadController;
 use App\Http\Controllers\Admin\Pages\PageController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\Product\PproductController;
 use App\Http\Controllers\Admin\Product\ProductController;
-use App\Http\Controllers\Admin\Product\WproductController;
 use App\Http\Controllers\Admin\SiteContent\SitecontentController;
 use App\Http\Controllers\Admin\Slide\SliderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -64,8 +61,6 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::resource("posts", PostController::class);
     Route::resource("sitecontent", SitecontentController::class);
     Route::resource("products", ProductController::class);
-    Route::resource("wproducts", WproductController::class);
-    Route::resource("pproducts", PproductController::class);
     Route::post("/wdelimg", [AdminController::class, "wdelimg"])->name("wdelimg");
     Route::post("/pdelimg", [AdminController::class, "pdelimg"])->name("pdelimg");
 

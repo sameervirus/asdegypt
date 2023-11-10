@@ -1,0 +1,27 @@
+.model ul,
+.model ol {
+  list-style: revert;
+  padding-inline-start: 20px;
+}
+.model li {
+  margin-bottom: 10px;
+}
+.model h3 {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.model hr {
+  margin: 20px 0;
+}
+
+.model table {
+  margin-top: 1em;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.model td,
+.model th {
+  border: 1px solid #d3d3d3;
+  padding: 5px 10px;
+}

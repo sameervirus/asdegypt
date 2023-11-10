@@ -138,7 +138,7 @@ export default function Category({ agent_products, agent_categories }) {
                       key={p.id}
                       className="py-1 hover:text-primary uppercase font-semibold"
                     >
-                      <a
+                      <Link
                         className={
                           p.category === agent_products[0].category
                             ? "text-primary"
@@ -147,7 +147,7 @@ export default function Category({ agent_products, agent_categories }) {
                         href={`/products/${p.agent}/${p.category}`}
                       >
                         {toTitleCase(p.category)}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

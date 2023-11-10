@@ -108,7 +108,7 @@ export default function Agent({ agent_products }) {
                       key={category.id}
                       className="py-1 hover:text-primary uppercase font-semibold"
                     >
-                      <a
+                      <Link
                         className={
                           category.agent === agent_products[0].agent
                             ? "text-primary"
@@ -117,7 +117,7 @@ export default function Agent({ agent_products }) {
                         href={`/products/${category.agent}`}
                       >
                         {toTitleCase(category.agent)}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

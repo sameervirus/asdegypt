@@ -1,5 +1,6 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import LanguageSwitcher from "@/Components/LanguageSwitcher";
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function MobileMenu({ setMenuPanel }) {
@@ -46,13 +47,13 @@ export default function MobileMenu({ setMenuPanel }) {
 
         <ul className="mobile-menu">
           <li>
-            <a href="/products">Products</a>
+            <Link href="/products">Products</Link>
           </li>
           <li>
-            <a href="/products">News</a>
+            <Link href="/products">News</Link>
           </li>
           <li>
-            <a href="/products">Reference</a>
+            <Link href="/products">Reference</Link>
           </li>
         </ul>
       </div>
@@ -63,13 +64,13 @@ export default function MobileMenu({ setMenuPanel }) {
 
         <ul className="mobile-menu">
           <li>
-            <a href="/products">Distributors</a>
+            <Link href="/products">Distributors</Link>
           </li>
           <li>
-            <a href="/products">About</a>
+            <Link href="/products">About</Link>
           </li>
           <li>
-            <a href="/products">Contact</a>
+            <Link href="/products">Contact</Link>
           </li>
         </ul>
       </div>

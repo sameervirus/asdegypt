@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function Breadcrumb({ title, items }) {
@@ -8,7 +9,7 @@ export default function Breadcrumb({ title, items }) {
         {items &&
           items.map((item) => (
             <li key={item.name}>
-              <a href={item.url}>{item.name}</a>
+              <Link href={item.url}>{item.name}</Link>
             </li>
           ))}
       </ul>

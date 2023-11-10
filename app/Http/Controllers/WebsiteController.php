@@ -6,8 +6,10 @@ use App\Admin\Pages\Page;
 use App\Admin\Product\Product;
 use App\Admin\SiteContent\Sitecontent;
 use App\Admin\Slide\Slider;
+use App\Http\Resources\ProductImagesResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 
 
@@ -58,9 +60,12 @@ class WebsiteController extends Controller
     {
         $product = Product::where('model', $model)->first();
         $products = Product::where('agent', $agent)->where('category', $category)->orderBy('id')->get();
+        
+
         return Inertia::render('Products/Model', [
             'product' => $product,
             'agent_products' => $products,
+            'images' => ProductImagesResource::collection($product->getMedia('images'))
         ]);
     }
 }

@@ -73,12 +73,12 @@
                         </p>
                         <form class="form-horizontal form-label-left">
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-right">Select Category</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12 text-right">Select Agent</label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                   <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                    <option>Choose Category</option>
-                                    @foreach(\App\Admin\Product\Product::groupBy('category')->select('category')->get() as $category)
-                                    <option value="{{route('products.show', $category->category)}}" {{ @$products && $products->first()->category == $category->category ? 'selected' : '' }}>{{ \Str::title(str_replace('_', ' ', $category->category)) }}</option>
+                                    <option>Choose Agent</option>
+                                    @foreach(\App\Admin\Product\Product::groupBy('agent')->select('agent')->get() as $agent)
+                                    <option value="{{route('products.show', $agent->agent)}}" {{ @$products && $products->first()->agent == $agent->agent ? 'selected' : '' }}>{{ \Str::title(str_replace('_', ' ', $agent->agent)) }}</option>
                                     @endforeach
                                   </select>
                                 </div>

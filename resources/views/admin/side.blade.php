@@ -35,28 +35,12 @@
 
             <li><a><i class="fa fa-desktop"></i>Dynamic Pages<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    @if(Request::getHost() == 'www.lavor-egypt.com')
                     <li><a href="{{route('products.index')}}">Products</a></li>
-                    <li><a href="{{route('downloads.index')}}">Media Library</a></li>
-                    @endif
-                    @if(Request::getHost() == 'www.wortex-egypt.com')
-                    <li><a href="{{route('wproducts.index')}}">Products</a></li>
-                    @endif
-                    @if(Request::getHost() == 'www.piusi-egypt.com')
-                    <li><a href="{{route('pproducts.index')}}">Products</a></li>
-                    @endif
                     <li><a href="{{route('posts.index')}}">News & Events</a></li>
                     <li><a href="{{route('distributors.index')}}">Distributors موزعين</a></li>
                     <li><a href="{{route('feedbacks.index')}}">رسائل الموقع</a></li>
                 </ul>
             </li>
-            <!--
-			<li><a><i class="fa fa-envelope"></i> رسائل من العملاء <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="{{url('admin/message')}}">الرسائل</a></li>
-                </ul>
-            </li>
-        -->
 
             @can('users_manage')
             <li><a><i class="fa fa-users"></i>Users<span class="fa fa-chevron-down"></span></a>
