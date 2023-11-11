@@ -18,8 +18,7 @@ class Post extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(248)
-            ->height(217);
+            ->width(248);
     }
 
     protected $fillable = [
@@ -28,6 +27,7 @@ class Post extends Model implements HasMedia
 
     public function getImagesAttribute()
     {
+        $item = [];
         foreach ($this->getMedia('post_img') as $image) {
             $item[] = ['thumb' => $image->getUrl('thumb'), 'image' => $image->getUrl()];
         };

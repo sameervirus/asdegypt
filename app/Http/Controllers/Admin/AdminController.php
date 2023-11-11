@@ -13,6 +13,7 @@ use App\Admin\Product\Product;
 use App\Admin\Wproduct;
 use App\Admin\Pproduct;
 use App\Admin\Post;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class AdminController extends Controller
 {
@@ -154,6 +155,24 @@ class AdminController extends Controller
     {
         $items = \DB::table('feedbacks')->paginate(15);
         return view('admin.feedbacks.index', compact('items')); 
+    }
+
+    public function favimg(Request $request)
+    {
+        $product = Product::findOrFail($request->id);
+        foreach($product->getMedia('images') as $item)
+        {
+            $item->forgetCustomProperty('fav');
+            $item->save();
+        }
+
+        $image = Media::find($request->imgs);
+
+        $image->setCustomProperty('fav', true);
+
+        $image->save();
+
+        return 'ok';
     }
 
 }

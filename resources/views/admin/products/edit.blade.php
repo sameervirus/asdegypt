@@ -120,7 +120,8 @@
                               <div class="mask">
                                 <p></p>
                                 <div class="tools tools-bottom">
-                                  <a href="#" class="image_delete" data-img="{{$image->id}}"><i class="fa fa-times"></i></a>                                  
+                                  <a href="#" class="image_delete" data-img="{{$image->id}}"><i class="fa fa-times"></i></a>
+                                  <a href="#" class="image_favorite" data-img="{{$image->id}}"><i class="fa fa-star {{ $image->hasCustomProperty('fav') ? 'red': ''}}"></i></a>
                                 </div>
                               </div>
                             </div>
@@ -227,6 +228,27 @@
               tr.slideUp('slow').remove();
             } else {
               alert ("Server is down please try again");
+            }
+          });
+        }
+      });
+
+      $("body").on("click",".image_favorite",function (e) {
+        e.preventDefault();
+        if (confirm('Are you sure ?')) {
+          var img = $(this).data('img');
+          var i = $(this).children('i');
+
+          $.post("{{route('favimg')}}",{_token:"{{ csrf_token() }}",id: "{{ $item->id }}", imgs: img }).done(function( data ) {
+            if (data == 'ok') {
+                $('.image_favorite .fa').each(function() {
+                    $(this).removeClass('red');
+                });
+                i.addClass('red');
+
+                alert ("Done");
+            } else {
+                alert ("Server is down please try again");
             }
           });
         }

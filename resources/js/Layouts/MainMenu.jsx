@@ -23,21 +23,21 @@ export default function MainMenu() {
           </div>
         </li>
         <li>
-          <Link href="/products">News</Link>
+          <Link href="/news">News</Link>
         </li>
         <li>
-          <Link href="/products">Reference</Link>
+          <Link href="/reference">Reference</Link>
         </li>
       </ul>
       <ul className="menu-top flex">
         <li>
-          <Link href="/products">Distributors</Link>
+          <Link href="/distributors">Distributors</Link>
         </li>
         <li>
-          <Link href="/products">About</Link>
+          <Link href="/about">About</Link>
         </li>
         <li>
-          <Link href="/products">Contact</Link>
+          <Link href="/contact-us">Contact</Link>
         </li>
       </ul>
     </>

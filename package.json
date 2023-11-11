@@ -32,6 +32,7 @@
   "dependencies": {
     "fslightbox-react": "^1.7.6",
     "html-react-parser": "^4.2.2",
+    "react-data-table-component": "^7.5.4",
     "react-responsive-carousel": "^3.2.23",
     "react-sliding-side-panel": "^2.0.3"
   }

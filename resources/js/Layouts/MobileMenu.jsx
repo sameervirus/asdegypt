@@ -50,10 +50,10 @@ export default function MobileMenu({ setMenuPanel }) {
             <Link href="/products">Products</Link>
           </li>
           <li>
-            <Link href="/products">News</Link>
+            <Link href="/news">News</Link>
           </li>
           <li>
-            <Link href="/products">Reference</Link>
+            <Link href="/reference">Reference</Link>
           </li>
         </ul>
       </div>
@@ -64,13 +64,13 @@ export default function MobileMenu({ setMenuPanel }) {
 
         <ul className="mobile-menu">
           <li>
-            <Link href="/products">Distributors</Link>
+            <Link href="/distributors">Distributors</Link>
           </li>
           <li>
-            <Link href="/products">About</Link>
+            <Link href="/about">About</Link>
           </li>
           <li>
-            <Link href="/products">Contact</Link>
+            <Link href="/contact-us">Contact</Link>
           </li>
         </ul>
       </div>

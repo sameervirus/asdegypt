@@ -26,6 +26,10 @@ use Inertia\Inertia;
 
 Route::get('/', [WebsiteController::class, 'index']);
 Route::get('/about', [WebsiteController::class, 'about']);
+Route::get('/news', [WebsiteController::class, 'news']);
+Route::get('/news/{slug}', [WebsiteController::class, 'post']);
+Route::get('/reference', [WebsiteController::class, 'reference']);
+Route::get('/distributors', [WebsiteController::class, 'distributors']);
 Route::get('/contact-us', [WebsiteController::class, 'contacts']);
 Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
 Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
@@ -63,6 +67,7 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::resource("products", ProductController::class);
     Route::post("/wdelimg", [AdminController::class, "wdelimg"])->name("wdelimg");
     Route::post("/pdelimg", [AdminController::class, "pdelimg"])->name("pdelimg");
+    Route::post("/favimg", [AdminController::class, "favimg"])->name("favimg");
 
     Route::resource("/pages", PageController::class);
     Route::get("/pages-video", [PageController::class, "video"])->name(

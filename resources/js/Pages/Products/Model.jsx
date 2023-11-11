@@ -16,12 +16,10 @@ function getDistinctObjects(array) {
   });
 }
 
-export default function Model({ product, agent_products, images }) {
+export default function Model({ product, agent_products, images, fav_image }) {
   const { products } = usePage().props;
   const categories = getDistinctObjects(products);
-  const [mainImage, setMainImage] = useState(
-    images?.data?.length > 0 && images?.data[0]["original"],
-  );
+  const [mainImage, setMainImage] = useState(fav_image);
   const [toggler, setToggler] = useState(false);
   const [zoomImages, setZoomImages] = useState(
     images?.data?.map((image) => image?.original),
@@ -49,8 +47,6 @@ export default function Model({ product, agent_products, images }) {
     txt.innerHTML = html;
     return txt.value;
   };
-
-  console.log(product);
 
   return (
     <>
