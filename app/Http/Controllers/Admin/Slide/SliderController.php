@@ -66,14 +66,18 @@ class SliderController extends Controller
         $massage = 'Successfully Added';
         $file_name = $handle->file_dst_name;
         $handle->clean();
-        $header = $caption = '';
+        $header = $caption = $header_ar = $caption_ar = '';
         if ($request->filled('header'))  $header = $request->header;
+        if ($request->filled('header_ar'))  $header_ar = $request->header_ar;
         if ($request->filled('caption'))  $caption = $request->caption;
+        if ($request->filled('caption_ar'))  $caption_ar = $request->caption_ar;
 
         Slider::create([
           'image' => $file_name,
           'header' => $header,
+          'header_ar' => $header_ar,
           'caption' => $caption,
+          'caption_ar' => $caption_ar,
           'sort' => $order
         ]);
       } else {
@@ -118,7 +122,9 @@ class SliderController extends Controller
     $slider = Slider::findOrFail($id);
 
     $slider->header = $request->header;
+    $slider->header_ar = $request->header_ar;
     $slider->caption = $request->caption;
+    $slider->caption_ar = $request->caption_ar;
 
     if ($request->file('file')) {
 

@@ -1,11 +1,12 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import LanguageSwitcher from "@/Components/LanguageSwitcher";
+import { __ } from "@/Util/lang";
 import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function MobileMenu({ setMenuPanel }) {
   return (
-    <div className="w-full px-2 py-1 pe-4 bg-gray-100">
+    <div className="w-full px-2 py-1 rtl:ps-4 ltr:pe-4 bg-gray-100">
       <div className="flex justify-between bg-white">
         <div className="">
           <ApplicationLogo />
@@ -24,13 +25,13 @@ export default function MobileMenu({ setMenuPanel }) {
               <path
                 fill="none"
                 stroke="#000"
-                stroke-width="1.06"
+                strokeWidth="1.06"
                 d="M16,16 L4,4"
               ></path>
               <path
                 fill="none"
                 stroke="#000"
-                stroke-width="1.06"
+                strokeWidth="1.06"
                 d="M16,4 L4,16"
               ></path>
             </svg>
@@ -42,35 +43,35 @@ export default function MobileMenu({ setMenuPanel }) {
       </div>
       <div className="mb-4">
         <div className="bg-white text-gray-500">
-          <strong className="text-[9px]">PRODUCTS</strong>
+          <strong className="text-[9px]">{__("Products")}</strong>
         </div>
 
         <ul className="mobile-menu">
           <li>
-            <Link href="/products">Products</Link>
+            <Link href="/products">{__("Products")}</Link>
           </li>
           <li>
-            <Link href="/news">News</Link>
+            <Link href="/news">{__("News")}</Link>
           </li>
           <li>
-            <Link href="/reference">Reference</Link>
+            <Link href="/reference">{__("Reference")}</Link>
           </li>
         </ul>
       </div>
       <div className="mb-4">
         <div className="bg-white text-gray-500">
-          <strong className="text-[9px]">COMPANY</strong>
+          <strong className="text-[9px]">{__("Company")}</strong>
         </div>
 
         <ul className="mobile-menu">
           <li>
-            <Link href="/distributors">Distributors</Link>
+            <Link href="/distributors">{__("Distributors")}</Link>
           </li>
           <li>
-            <Link href="/about">About</Link>
+            <Link href="/about">{__("About")}</Link>
           </li>
           <li>
-            <Link href="/contact-us">Contact</Link>
+            <Link href="/contact-us">{__("Contact")}</Link>
           </li>
         </ul>
       </div>

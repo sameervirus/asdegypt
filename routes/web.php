@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\SiteContent\SitecontentController;
 use App\Http\Controllers\Admin\Slide\SliderController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +24,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware('locale')->group(function() {
 Route::get('/', [WebsiteController::class, 'index']);
 Route::get('/about', [WebsiteController::class, 'about']);
 Route::get('/news', [WebsiteController::class, 'news']);
@@ -34,6 +35,9 @@ Route::get('/contact-us', [WebsiteController::class, 'contacts']);
 Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
 Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
 Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
+});
+
+Route::post('/lang-switch', [LanguageController::class, 'store'])->name('language.store');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

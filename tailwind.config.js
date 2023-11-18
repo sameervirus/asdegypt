@@ -12,7 +12,9 @@ export default {
 
   theme: {
     extend: {
-      fontFamily: {},
+      fontFamily: {
+        body: ['"Readex Pro"', "Roboto", "sans-serif"],
+      },
       colors: {
         primary: "#e1001a",
         secondary: "#19191d",

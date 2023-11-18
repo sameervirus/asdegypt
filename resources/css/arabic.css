@@ -1,0 +1,5 @@
+.menu-top li a:before,
+.menu-top li button:before {
+  right: 0;
+  left: auto;
+}

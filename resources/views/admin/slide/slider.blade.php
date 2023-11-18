@@ -115,9 +115,11 @@
                       <div id="data_{{ $slide->id}}">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                           <textarea type="textarea" name="header" placeholder="Title" class="form-control">{{ $slide->header }}</textarea>
+                          <textarea type="textarea" name="header_ar" placeholder="العنوان" class="form-control">{{ $slide->header_ar }}</textarea>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                           <textarea type="textarea" name="caption" placeholder="Title 2" class="form-control">{{ $slide->caption }}</textarea>
+                          <textarea type="textarea" name="caption_ar" placeholder="الوصف" class="form-control">{{ $slide->caption_ar }}</textarea>
                         </div>
                       </div>
                       <div class="clearfix"></div>

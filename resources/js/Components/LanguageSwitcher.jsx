@@ -1,13 +1,28 @@
+import { router, usePage } from "@inertiajs/react";
 import React from "react";
 
 export default function LanguageSwitcher() {
+  const { locale } = usePage().props;
+
+  const handleChangeLanguage = (language) => {
+    router.post(
+      route("language.store"),
+      { language },
+      {
+        onSuccess: () => {
+          window.location.reload();
+        },
+      },
+    );
+  };
+
   return (
     <ul className="menu-top flex">
       <li>
-        <a href="/en">Eg</a>
+        <button onClick={() => handleChangeLanguage("en")}>Eg</button>
       </li>
       <li>
-        <a href="/ar">Ar</a>
+        <button onClick={() => handleChangeLanguage("ar")}>Ar</button>
       </li>
     </ul>
   );

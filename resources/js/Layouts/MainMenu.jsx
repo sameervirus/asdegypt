@@ -1,21 +1,24 @@
 import React from "react";
 import { Link, usePage } from "@inertiajs/react";
 import { getDistinctObjects, toTitleCase } from "@/Util/Helpers";
+import { __ } from "@/Util/lang";
 
 export default function MainMenu() {
-  const { products } = usePage().props;
+  const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
   return (
     <>
       <ul className="menu-top flex me-10">
         <li>
-          <Link href="/products">Products</Link>
+          <Link href="/products">{__("Products")}</Link>
           <div>
             <ul>
               {categories?.map((category) => (
                 <li key={category.id}>
                   <Link href={`/products/${category.agent}`}>
-                    {toTitleCase(category.agent)}
+                    {locale === "ar"
+                      ? category.agent_ar
+                      : toTitleCase(category.agent)}
                   </Link>
                 </li>
               ))}
@@ -23,21 +26,21 @@ export default function MainMenu() {
           </div>
         </li>
         <li>
-          <Link href="/news">News</Link>
+          <Link href="/news">{__("News")}</Link>
         </li>
         <li>
-          <Link href="/reference">Reference</Link>
+          <Link href="/reference">{__("Reference")}</Link>
         </li>
       </ul>
       <ul className="menu-top flex">
         <li>
-          <Link href="/distributors">Distributors</Link>
+          <Link href="/distributors">{__("Distributors")}</Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+          <Link href="/about">{__("About")}</Link>
         </li>
         <li>
-          <Link href="/contact-us">Contact</Link>
+          <Link href="/contact-us">{__("Contact")}</Link>
         </li>
       </ul>
     </>
