@@ -11,6 +11,7 @@ use App\Admin\Slide\Slider;
 use App\Http\Resources\ProductImagesResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Inertia\Inertia;
 
@@ -19,15 +20,20 @@ class WebsiteController extends Controller
 {
     public function index()
     {
+        $ids = DB::table('home_products')->pluck('product_id')->toArray();
+
         return Inertia::render('Home', [
             'sliders' => Slider::all(),
-            'pages' => Page::all()
+            'pages' => Page::all(),
+            'features' => Product::whereIn('id', $ids)->get()
         ]);
     }
 
     public function about()
     {
-        return Inertia::render('About');
+        return Inertia::render('About', [
+            'pages' => Page::all(),
+        ]);
     }
 
     public function news()
@@ -48,7 +54,9 @@ class WebsiteController extends Controller
 
     public function reference()
     {
-        return Inertia::render('Reference');
+        return Inertia::render('Reference', [
+            'pages' => Page::all(),
+        ]);
     }
 
     public function distributors()
@@ -65,6 +73,11 @@ class WebsiteController extends Controller
         return Inertia::render('Contacts', [
             'data' => $site_content
         ]);
+    }
+
+    public function products()
+    {
+        return Inertia::render('Products/Products');
     }
 
     public function agents($agent)

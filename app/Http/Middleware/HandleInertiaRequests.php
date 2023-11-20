@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Admin\Product\Product;
+use App\Admin\SiteContent\Sitecontent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -31,6 +33,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $locale = App::getLocale();
+        $site_content = Sitecontent::all();
         return [
             ...parent::share($request),
             'auth' => [
@@ -40,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'site_content' => $site_content,
             'language' => fn () => translations(base_path('lang/' . app()->getLocale() . '.json')),
             'products' => Product::orderBy('sort_order', 'asc')->get(),
             'csrf' => csrf_token(),

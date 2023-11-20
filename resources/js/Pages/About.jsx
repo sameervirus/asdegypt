@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import AppLayout from "@/Layouts/AppLayout";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
+import { __ } from "@/Util/lang";
+import parse from "html-react-parser";
 
-export default function About({ sliders, pages }) {
+export default function About({ pages }) {
   const items = [
     {
-      name: "Home",
+      name: __("Home"),
       url: "/",
     },
     {
-      name: "About",
+      name: __("About Us"),
       url: "#",
     },
   ];
@@ -21,11 +23,22 @@ export default function About({ sliders, pages }) {
     setActiveTab(tab);
   };
 
+  const { site_content, locale } = usePage().props;
+  function getContentItem(str) {
+    const item = site_content.find((s) => s.code === str && s.lang === locale);
+    return item.content;
+  }
+
+  function getPageContent(str) {
+    const page = pages.find((p) => p.page === str);
+    return locale === "ar" ? parse(page.content_ar) : parse(page.content);
+  }
+
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head title={__("About Us")} />
       <AppLayout>
-        <Breadcrumb title="About" items={items} />
+        <Breadcrumb title={__("About Us")} items={items} />
 
         <div className="">
           <ul
@@ -44,7 +57,7 @@ export default function About({ sliders, pages }) {
                 role="tab"
                 aria-selected={activeTab === "profile" ? "true" : "false"}
               >
-                About
+                {__("About Us")}
               </button>
             </li>
             <li
@@ -58,7 +71,7 @@ export default function About({ sliders, pages }) {
                 role="tab"
                 aria-selected={activeTab === "provided" ? "true" : "false"}
               >
-                Provided
+                {__("Provided")}
               </button>
             </li>
             <li
@@ -72,7 +85,7 @@ export default function About({ sliders, pages }) {
                 role="tab"
                 aria-selected={activeTab === "policy" ? "true" : "false"}
               >
-                Policy
+                {__("Policy")}
               </button>
             </li>
           </ul>
@@ -88,18 +101,9 @@ export default function About({ sliders, pages }) {
           >
             <div className="px-5 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 text-white">
               <h2 className="text-2xl lg:text-4xl mb-5">
-                Al Arabia for Service Development
+                {getContentItem("title")}
               </h2>
-              <div className="">
-                Where we specialize in the areas of industrial equipment and
-                complementary equipment for production lines, Cleaning and
-                disinfection, washing and polishing floors Equipment, Dust and
-                water suction machines, Welding machines, battery chargers
-                platforms, Car Service Equipment, Counters and product level
-                measurement devices, All lubrication equipment and lubrication,
-                Air compressors and all kinds of power tools and industrial
-                equipment.
-              </div>
+              <div className="">{getPageContent("about-tab1")}</div>
             </div>
           </div>
           <div
@@ -109,17 +113,9 @@ export default function About({ sliders, pages }) {
           >
             <div className="px-5 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 text-white">
               <h2 className="text-2xl lg:text-4xl mb-5">
-                Our Company Provided ....
+                {__("ProvidedText")}
               </h2>
-              <div className="">
-                The company is characterized by providing the highest technical
-                specifications at unbeatable prices. The company also real
-                ensuring all equipment through a team of engineers and
-                technicians trained abroad on maintenance and processing
-                equipment and provide all original spare parts and due to the
-                presence service, maintenance and spare private parts of our
-                company only centers.
-              </div>
+              <div className="">{getPageContent("about-tab2")}</div>
             </div>
           </div>
           <div
@@ -128,27 +124,8 @@ export default function About({ sliders, pages }) {
             role="tabpanel"
           >
             <div className="px-5 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 text-white">
-              <h2 className="text-2xl lg:text-4xl mb-5">
-                Company's Policy ....
-              </h2>
-              <div className="">
-                Import finest equipment from major European companies, which are
-                the company's representation in the Arab Republic of Egypt is
-                better represented by major companies testimony in terms of
-                after-sales service and technical advice to all the customers
-                and the nomination of appropriate equipment that meets the needs
-                of the client and staff training on how to use all the
-                equipment.
-                <br />
-                <br />
-                The company is characterized by providing the highest technical
-                specifications at unbeatable prices. The company also real
-                ensuring all equipment through a team of engineers and
-                technicians trained abroad on maintenance and processing
-                equipment and provide all original spare parts and that the
-                existence of the service and maintenance of private and spare
-                parts centers Our company only.
-              </div>
+              <h2 className="text-2xl lg:text-4xl mb-5">{__("PolicyText")}</h2>
+              <div className="">{getPageContent("about-tab3")}</div>
             </div>
           </div>
         </div>

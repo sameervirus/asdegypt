@@ -6,6 +6,8 @@ import {
   capitalizeEachWord,
   toTitleCase,
 } from "@/Util/Helpers";
+import ProductHead from "@/Features/ProductHead";
+import { __ } from "@/Util/lang";
 
 function getDistinctObjects(array) {
   const uniqueIds = new Set();
@@ -19,11 +21,15 @@ function getDistinctObjects(array) {
 }
 
 export default function Agent({ agent_products }) {
-  const { products } = usePage().props;
+  const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head
+        title={
+          locale === "ar" ? agent_products[0].agent_ar : agent_products[0].agent
+        }
+      />
       <AppLayout>
         <div className="block lg:hidden mt-10 bg-primary text-white">
           <Link className="flex flex-wrap items-center p-3" href={`/products`}>
@@ -41,38 +47,19 @@ export default function Agent({ agent_products }) {
                 points="13 16 7 10 13 4"
               ></polyline>
             </svg>
-            Products
+            {__("Products")}
           </Link>
         </div>
-        <div className="hidden lg:block top-nav mt-10">
-          <ul
-            className="about-tabs flex flex-wrap -mb-px text-sm font-bold uppercase text-center px-5 lg:px-10"
-            id="default-tab"
-            role="tablist"
-          >
-            {categories &&
-              agent_products &&
-              categories?.map((cat) => (
-                <li
-                  key={cat.id}
-                  className={`ml-[1px] ${
-                    cat.agent === agent_products[0].agent ? "active" : ""
-                  }`}
-                  role="presentation"
-                >
-                  <Link
-                    className={`inline-block px-4 py-2 uppercase hover:text-primary ${cat.agent}`}
-                    href={`/products/${cat.agent}`}
-                  >
-                    {cat.agent?.replace("_", " ")}
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
+        <ProductHead
+          categories={categories}
+          agent_products={agent_products}
+          locale={locale}
+        />
         <div className="mt-[-8px] py-5 px-5 lg:py-5 lg:px-10 mb-10 bg-[#00000005]">
           <h1 className="text-primary text-3xl font-bold mb-4">
-            {capitalizeFirstLetter(agent_products[0].agent)}
+            {locale === "ar"
+              ? agent_products[0].agent
+              : capitalizeFirstLetter(agent_products[0].agent)}
           </h1>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div className="col-span-12 lg:col-span-9">
@@ -94,7 +81,9 @@ export default function Agent({ agent_products }) {
                         />
                       </div>
                       <h2 className="text-sm font-semibold ms-4 lg:ms-0">
-                        {capitalizeEachWord(c.category)}
+                        {locale === "ar"
+                          ? c.category_ar
+                          : capitalizeEachWord(c.category)}
                       </h2>
                     </div>
                   ))}
@@ -116,7 +105,9 @@ export default function Agent({ agent_products }) {
                         }
                         href={`/products/${category.agent}`}
                       >
-                        {toTitleCase(category.agent)}
+                        {locale === "ar"
+                          ? category.agent_ar
+                          : toTitleCase(category.agent)}
                       </Link>
                     </li>
                   ))}

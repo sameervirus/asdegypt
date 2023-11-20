@@ -1,15 +1,16 @@
 import Breadcrumb from "@/Components/Breadcrumb";
 import AppLayout from "@/Layouts/AppLayout";
 import { Head, usePage } from "@inertiajs/react";
+import { __ } from "./../Util/lang";
 
 export default function Contacts() {
   const items = [
     {
-      name: "Home",
+      name: __("Home"),
       url: "/",
     },
     {
-      name: "Contact us",
+      name: __("Contact Us"),
       url: "#",
     },
   ];
@@ -18,12 +19,10 @@ export default function Contacts() {
 
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head title={__("Contact Us")} />
       <AppLayout>
-        <Breadcrumb title="Contact Us" items={items} />
-        <h2 className="mx-5 lg:mx-20 py-10 text-4xl">
-          Contact us to solve any doubt.
-        </h2>
+        <Breadcrumb title={__("Contact Us")} items={items} />
+        <h2 className="mx-5 lg:mx-20 py-10 text-4xl">{__("ContactHead")}</h2>
         <div className="grid grid-col-1 lg:grid-cols-3 mx-5 lg:mx-20 lg:gap-20">
           <div className="flex flex-col bg-[#f8f8f8] p-5 items-center gap-1">
             <div>
@@ -42,7 +41,7 @@ export default function Contacts() {
                 <path d="M 1,4 1,16 19,16 19,4 1,4 Z M 18,15 2,15 2,5 18,5 18,15 Z"></path>
               </svg>
             </div>
-            <p className="text-sm text-primary">Email</p>
+            <p className="text-sm text-primary">{__("Email")}</p>
             <a
               className="underline hover:decoration-primary"
               href={`mailto:${data.email}`}
@@ -73,7 +72,7 @@ export default function Contacts() {
                 ></path>
               </svg>
             </div>
-            <p className="text-sm text-primary">Customer Support</p>
+            <p className="text-sm text-primary">{__("Customer Support")}</p>
             <a
               className="underline hover:decoration-primary"
               href={`tel:${data.mob}`}
@@ -95,7 +94,7 @@ export default function Contacts() {
                 <polygon points="3 11 4 11 4 18 7 18 7 12 12 12 12 18 16 18 16 11 17 11 17 19 11 19 11 13 8 13 8 19 3 19"></polygon>
               </svg>
             </div>
-            <p className="text-sm text-primary">Address</p>
+            <p className="text-sm text-primary">{__("Address")}</p>
             <a
               className="text-center"
               href={`address:${data["address-management"]}`}

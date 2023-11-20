@@ -5,14 +5,14 @@ import ServiceSection from "@/Features/Home/ServiceSection";
 import AppLayout from "@/Layouts/AppLayout";
 import { Link, Head } from "@inertiajs/react";
 
-export default function Welcome({ sliders, pages }) {
+export default function Welcome({ sliders, pages, features }) {
   return (
     <>
       <Head title="Welcome" />
       <AppLayout>
         <MainSlider sliders={sliders} />
         <RedBanner pages={pages} />
-        <FeatureProducts />
+        <FeatureProducts features={features} />
         <ServiceSection />
       </AppLayout>
     </>

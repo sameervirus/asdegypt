@@ -4,15 +4,11 @@ namespace App\Http\Controllers\Admin;
  
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-use App\User;
-use Analytics;
-use Spatie\Analytics\Period;
-use App\Classes\GoogleAnalytics;
 use App\Admin\Product\Product;
 use App\Admin\Wproduct;
 use App\Admin\Pproduct;
 use App\Admin\Post;
+use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class AdminController extends Controller
@@ -23,58 +19,32 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function range2($unit)
+    public function home_products()
     {
-    	$array ='[';
-        for ($i=8;$i>-1;$i--) {
-            if ($unit == 'day') {
-                $date2 = date('Y-m-d',strtotime('-'.$i.' day'));
-                $date1 = date('Y-m-d', strtotime($date2));               
-            } elseif ($unit == 'week') {
-                $date2 = date('Y-m-d',strtotime('-'.$i.' week'));
-                $date1 = date('Y-m-d', strtotime($date2 .'- 6 days'));
-            } elseif ($unit == 'month') {
-                $date1 = date('Y-m-01',strtotime('-'. $i .' month'));
-                $date2 = date('Y-m-01', strtotime($date1 .'+ 1 month'));
-            }            
+    	return view('admin.products.home_products', [
+            'products' => DB::table('home_products')->get()
+        ]);
+    }
 
-            $array .= "[". strtotime($date2 ."UTC") * 1000 .",".Visitor::range($date1,$date2)."],";
+    public function update_products(Request $request)
+    {
+        $request->validate([
+            'products' => 'required|array',
+        ]);
+        if($request->products) {
+            foreach($request->products as $key => $p)
+            {
+                DB::table('home_products')->where('id', $key + 1)->update(['product_id'=> $p]);
+            }
         }
-        $array = rtrim($array,",");
+        flash()->overlay('Successfully Updated','Success');
+        return redirect()->route('home_products');
 
-        $array .=']';
-
-        return $array;
     }
 
     public function index()
     {
-        //$data = GoogleAnalytics::visitors_and_pageviews();
-        //dd($data);exit;
-        $analyticsData_one = Analytics::fetchTotalVisitorsAndPageViews(Period::days(14));
-        $this->data['dates'] = $analyticsData_one->pluck('date');
-        $this->data['visitors'] = $analyticsData_one->pluck('visitors');
-        $this->data['pageViews'] = $analyticsData_one->pluck('pageViews');
-        
-        /* $analyticsData_two = Analytics::fetchVisitorsAndPageViews(Period::days(14)); */
-        /* $this->data['two_dates'] = $analyticsData_two->pluck('date'); */
-        /* $this->data['two_visitors'] = $analyticsData_two->pluck('visitors')->count(); */
-        /* $this->data['two_pageTitle'] = $analyticsData_two->pluck('pageTitle')->count(); */
-        
-        /* $analyticsData_three = Analytics::fetchMostVisitedPages(Period::days(14)); */
-        /* $this->data['three_url'] = $analyticsData_three->pluck('url'); */
-        /* $this->data['three_pageTitle'] = $analyticsData_three->pluck('pageTitle'); */
-        /* $this->data['three_pageViews'] = $analyticsData_three->pluck('pageViews'); */
-        
-        $this->data['browserjson'] = GoogleAnalytics::topbrowsers();
 
-        $result = GoogleAnalytics::country();
-        $this->data['country'] = $result->pluck('country');
-        $this->data['country_sessions'] = $result->pluck('sessions');
-
-        $this->data['ceci_ver'] = config('mycms.ceci_ver');
-        $this->data['title'] = trans('backpack::base.dashboard'); // set the page title
-        return view('admin.dashboard', $this->data);
     }
 
     public function upload_img(Request $request)

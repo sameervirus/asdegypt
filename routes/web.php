@@ -32,6 +32,7 @@ Route::get('/news/{slug}', [WebsiteController::class, 'post']);
 Route::get('/reference', [WebsiteController::class, 'reference']);
 Route::get('/distributors', [WebsiteController::class, 'distributors']);
 Route::get('/contact-us', [WebsiteController::class, 'contacts']);
+Route::get('/products', [WebsiteController::class, 'products']);
 Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
 Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
 Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
@@ -72,6 +73,8 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::post("/wdelimg", [AdminController::class, "wdelimg"])->name("wdelimg");
     Route::post("/pdelimg", [AdminController::class, "pdelimg"])->name("pdelimg");
     Route::post("/favimg", [AdminController::class, "favimg"])->name("favimg");
+    Route::get("/home-products", [AdminController::class, "home_products"])->name("home_products");
+    Route::post("/home-products", [AdminController::class, "update_products"])->name("update_products");
 
     Route::resource("/pages", PageController::class);
     Route::get("/pages-video", [PageController::class, "video"])->name(

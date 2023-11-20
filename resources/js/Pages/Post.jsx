@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import AppLayout from "@/Layouts/AppLayout";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
+import { __ } from "@/Util/lang";
 
 export default function Post({ post }) {
+  const { locale } = usePage().props;
+
   const items = [
     {
-      name: "Home",
+      name: __("Home"),
       url: "/",
     },
     {
-      name: "News",
+      name: __("News"),
       url: "/news",
     },
     {
-      name: post.title,
+      name: locale === "ar" ? post.title_ar : post.title,
       url: "#",
     },
   ];
@@ -27,9 +30,12 @@ export default function Post({ post }) {
 
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head title={locale === "ar" ? post.title_ar : post.title} />
       <AppLayout>
-        <Breadcrumb title="News" items={items} />
+        <Breadcrumb
+          title={locale === "ar" ? post.title_ar : post.title}
+          items={items}
+        />
 
         <div className="container my-24 mx-auto md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -37,11 +43,15 @@ export default function Post({ post }) {
               <img src={post?.images[0].image} className="w-full" />
             </div>
             <div className="flex flex-col">
-              <h2 className="text-3xl font-medium">{post.title}</h2>
+              <h2 className="text-3xl font-medium">
+                {locale === "ar" ? post.title_ar : post.title}
+              </h2>
               <hr className="my-4" />
               <div
                 dangerouslySetInnerHTML={{
-                  __html: decodeHTML(post.body),
+                  __html: decodeHTML(
+                    locale === "ar" ? post.body_ar : post.body,
+                  ),
                 }}
               ></div>
             </div>

@@ -1,9 +1,10 @@
 import AppLayout from "@/Layouts/AppLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
 import React, { useState } from "react";
-import { capitalizeEachWord, toTitleCase } from "@/Util/Helpers";
+import { capitalizeEachWord, decodeHTML, toTitleCase } from "@/Util/Helpers";
 import FsLightbox from "fslightbox-react";
 import "./model.css";
+import { __ } from "@/Util/lang";
 
 function getDistinctObjects(array) {
   const uniqueIds = new Set();
@@ -17,7 +18,7 @@ function getDistinctObjects(array) {
 }
 
 export default function Model({ product, agent_products, images, fav_image }) {
-  const { products } = usePage().props;
+  const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
   const [mainImage, setMainImage] = useState(fav_image);
   const [toggler, setToggler] = useState(false);
@@ -42,15 +43,15 @@ export default function Model({ product, agent_products, images, fav_image }) {
     }
   };
 
-  const decodeHTML = (html) => {
-    var txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-  };
-
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head
+        title={
+          locale === "ar"
+            ? capitalizeEachWord(product.model_ar)
+            : capitalizeEachWord(product.model)
+        }
+      />
       <AppLayout>
         <div className="top-nav mt-10">
           <ul
@@ -72,7 +73,9 @@ export default function Model({ product, agent_products, images, fav_image }) {
                     className={`inline-block px-4 py-2 uppercase hover:text-primary ${cat.agent}`}
                     href={`/products/${cat.agent}`}
                   >
-                    {cat.agent?.replace("_", " ")}
+                    {locale === "ar"
+                      ? cat.agent_ar
+                      : cat.agent?.replace("_", " ")}
                   </Link>
                 </li>
               ))}
@@ -81,14 +84,22 @@ export default function Model({ product, agent_products, images, fav_image }) {
         <div className="mt-[-8px] py-5 px-5 lg:py-5 lg:px-10 mb-10">
           <div className="flex text-sm mb-4">
             <Link href={`/products/${product.agent}`}>
-              {capitalizeEachWord(product.agent)}
+              {locale === "ar"
+                ? capitalizeEachWord(product.agent_ar)
+                : capitalizeEachWord(product.agent)}
             </Link>
             <span className="px-2">/</span>
             <Link href={`/products/${product.agent}/${product.category}`}>
-              {capitalizeEachWord(product.category)}
+              {locale === "ar"
+                ? capitalizeEachWord(product.category_ar)
+                : capitalizeEachWord(product.category)}
             </Link>
             <span className="px-2">/</span>
-            <span>{capitalizeEachWord(product.model)}</span>
+            <span>
+              {locale === "ar"
+                ? capitalizeEachWord(product.model_ar)
+                : capitalizeEachWord(product.model)}
+            </span>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
             <div
@@ -124,7 +135,7 @@ export default function Model({ product, agent_products, images, fav_image }) {
                     <>
                       <hr className="my-8" />
                       <h3 className="mb-4 font-bold text-2xl text-primary">
-                        Data Sheets:
+                        {__("Data Sheets")}:
                       </h3>
                       <div id="">
                         <a
@@ -132,7 +143,7 @@ export default function Model({ product, agent_products, images, fav_image }) {
                           target="_blank"
                           className="underline"
                         >
-                          download
+                          {__("Download")}
                         </a>
                       </div>
                     </>
@@ -144,23 +155,34 @@ export default function Model({ product, agent_products, images, fav_image }) {
                       itemProp="name"
                       className="text-primary uppercase text-4xl font-semibold"
                     >
-                      {capitalizeEachWord(product.model)}
+                      {locale === "ar"
+                        ? capitalizeEachWord(product.model_ar)
+                        : capitalizeEachWord(product.model)}
                     </h2>
                     <p className="mb-4">
-                      {capitalizeEachWord(product.agent)} -{" "}
-                      {capitalizeEachWord(product.category)}
+                      {locale === "ar"
+                        ? capitalizeEachWord(product.agent_ar)
+                        : capitalizeEachWord(product.agent)}{" "}
+                      -{" "}
+                      {locale === "ar"
+                        ? capitalizeEachWord(product.category_ar)
+                        : capitalizeEachWord(product.category)}
                     </p>
                     <h3
                       itemProp="description"
                       className="mb-4 font-bold text-2xl text-primary"
                     >
-                      Descriptions:
+                      {__("Descriptions")}:
                     </h3>
                     <div className="mb-8">
                       {product.features && (
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: decodeHTML(product.features),
+                            __html: decodeHTML(
+                              locale === "ar"
+                                ? product.features_ar
+                                : product.features,
+                            ),
                           }}
                         />
                       )}
@@ -173,12 +195,16 @@ export default function Model({ product, agent_products, images, fav_image }) {
                           itemProp="feature"
                           className="mb-4 font-bold text-2xl text-primary"
                         >
-                          Technical Data:
+                          {__("Technical Data")}:
                         </h3>
                         <div id="data_sheet_div">
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: decodeHTML(product.technical_data),
+                              __html: decodeHTML(
+                                locale === "ar"
+                                  ? product.technical_data_ar
+                                  : product.technical_data,
+                              ),
                             }}
                           />
                         </div>
@@ -192,12 +218,16 @@ export default function Model({ product, agent_products, images, fav_image }) {
                           itemProp="accessories"
                           className="mb-4 font-bold text-2xl text-primary"
                         >
-                          Accessories:
+                          {__("Accessories")}:
                         </h3>
                         <div id="accessories_div">
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: decodeHTML(product.accessories),
+                              __html: decodeHTML(
+                                locale === "ar"
+                                  ? product.accessories_ar
+                                  : product.accessories,
+                              ),
                             }}
                           />
                         </div>
@@ -211,12 +241,16 @@ export default function Model({ product, agent_products, images, fav_image }) {
                           itemProp="optional"
                           className="mb-4 font-bold text-2xl text-primary"
                         >
-                          Optional:
+                          {"Optional"}:
                         </h3>
                         <div id="optional_div">
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: decodeHTML(product.optional),
+                              __html: decodeHTML(
+                                locale === "ar"
+                                  ? product.optional_ar
+                                  : product.optional,
+                              ),
                             }}
                           />
                         </div>
@@ -231,8 +265,13 @@ export default function Model({ product, agent_products, images, fav_image }) {
               <div className="w-full p-5 bg-[#00000005] relative">
                 <ul>
                   <li className="underline font-bold text-2xl mb-2">
-                    {capitalizeEachWord(product.agent)} /{" "}
-                    {capitalizeEachWord(product.category)}
+                    {locale === "ar"
+                      ? capitalizeEachWord(product.agent_ar)
+                      : capitalizeEachWord(product.agent)}{" "}
+                    /{" "}
+                    {locale === "ar"
+                      ? capitalizeEachWord(product.category_ar)
+                      : capitalizeEachWord(product.category)}
                   </li>
                   {agent_products?.map((p) => (
                     <li
@@ -245,7 +284,9 @@ export default function Model({ product, agent_products, images, fav_image }) {
                         }
                         href={`/products/${p.agent}/${p.category}/${p.model}`}
                       >
-                        {toTitleCase(p.model)}
+                        {locale === "ar"
+                          ? capitalizeEachWord(product.model_ar)
+                          : capitalizeEachWord(product.model)}
                       </Link>
                     </li>
                   ))}

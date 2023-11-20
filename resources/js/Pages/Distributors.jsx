@@ -1,44 +1,47 @@
 import React, { useState } from "react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import AppLayout from "@/Layouts/AppLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import DataTable from "react-data-table-component";
+import { __ } from "@/Util/lang";
 
 export default function Distributors({ distributors }) {
   const items = [
     {
-      name: "Home",
+      name: __("Home"),
       url: "/",
     },
     {
-      name: "Distributors",
+      name: __("Distributors"),
       url: "#",
     },
   ];
 
+  const { locale } = usePage().props;
+
   const columns = [
     {
-      name: "Name",
-      selector: (row) => row.name,
+      name: __("Name"),
+      selector: (row) => (locale === "ar" ? row.name_ar : row.name),
       sortable: true,
     },
     {
-      name: "Address",
-      selector: (row) => row.address,
+      name: __("Address"),
+      selector: (row) => (locale === "ar" ? row.address_ar : row.address),
       sortable: true,
     },
     {
-      name: "City",
-      selector: (row) => row.city,
+      name: __("City"),
+      selector: (row) => (locale === "ar" ? row.city_ar : row.city),
       sortable: true,
     },
     {
-      name: "Phone",
+      name: __("Phone"),
       selector: (row) => row.phone,
       sortable: true,
     },
     {
-      name: "Location",
+      name: __("Location"),
       selector: (row) => row.location,
       sortable: true,
     },
@@ -46,9 +49,9 @@ export default function Distributors({ distributors }) {
 
   return (
     <>
-      <Head title="Al Arabia for Service Development" />
+      <Head title={__("Distributors")} />
       <AppLayout>
-        <Breadcrumb title="Distributors" items={items} />
+        <Breadcrumb title={__("Distributors")} items={items} />
         <div className="bg-[#f8f8f8] py-4 mb-4">
           <div className="container my-24 mx-auto md:px-6">
             <DataTable

@@ -21,6 +21,7 @@
             <li><a><i class="fa fa-home"></i>Home Page<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="{{route('slider.index')}}">Main Slider</a></li>
+                    <li><a href="{{route('home_products')}}">Home Products</a></li>
                 </ul>
             </li>
 
