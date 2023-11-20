@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Product\Product;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DistributorController;
 use App\Http\Controllers\Admin\DownloadController;
@@ -51,6 +52,39 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('up', function () {
+    $directory = '/home/asdekfkk/public_html/images/';
+    $images = [];
+
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::SELF_FIRST
+    );
+
+    $ignoredDuplicates = [];
+
+    foreach ($iterator as $file) {
+        if ($file->isFile() && in_array(strtolower($file->getExtension()), ['jpeg','jpg', 'gif', 'png'])) {
+            $filename = $file->getFilename();
+
+            // Check if the file ends with _1 to _9 and if it has been added to the array
+            if (
+                preg_match('/_(?:[1-9])\./', $filename) === 0 
+                && str_contains($file->getFilename(), 'large_')
+                && !str_contains($file->getPathname(), '/old')) 
+            {
+                // $images[] = $file->getPathname();
+                $name = str_replace('large_', '', str_replace('.'.$file->getExtension(), '', $filename));
+                $product = Product::where('model', $name)->where('publish', 0)->first();
+                break;
+            }
+        }
+    }
+
+    return $product ?? '';
+});
+
 
 
 Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
