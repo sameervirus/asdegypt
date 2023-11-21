@@ -112,4 +112,14 @@ class WebsiteController extends Controller
             'fav_image' => $image ? $image->getFullUrl() : null
         ]);
     }
+
+    public function create()
+    {
+        return inertia('Registration/Create');
+    }
+
+    public function store(Request $request)
+    {
+        return $request->all();
+    }
 }

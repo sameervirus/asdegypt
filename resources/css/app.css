@@ -281,3 +281,11 @@
   padding-inline-start: 2rem;
   list-style-type: disc;
 }
+
+.contact-us {
+  background-image: url("/images/contact-us.jpg");
+}
+
+.product-registration {
+  background-image: url("/images/product-registration.jpg");
+}

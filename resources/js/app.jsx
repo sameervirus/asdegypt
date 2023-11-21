@@ -19,8 +19,8 @@ createInertiaApp({
 
     root.render(<App {...props} />);
 
-    const { locale } = props;
-    if (locale === "ar") {
+    const { initialPage } = props;
+    if (initialPage.props.locale === "ar") {
       import("../css/arabic.css");
     }
   },

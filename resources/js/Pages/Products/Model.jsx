@@ -285,8 +285,8 @@ export default function Model({ product, agent_products, images, fav_image }) {
                         href={`/products/${p.agent}/${p.category}/${p.model}`}
                       >
                         {locale === "ar"
-                          ? capitalizeEachWord(product.model_ar)
-                          : capitalizeEachWord(product.model)}
+                          ? capitalizeEachWord(p.model_ar)
+                          : capitalizeEachWord(p.model)}
                       </Link>
                     </li>
                   ))}

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Admin\Product\Product;
 use App\Admin\SiteContent\Sitecontent;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Inertia\Middleware;
@@ -46,7 +47,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'site_content' => $site_content,
             'language' => fn () => translations(base_path('lang/' . app()->getLocale() . '.json')),
-            'products' => Product::orderBy('sort_order', 'asc')->get(),
+            'products' => ProductResource::collection(Product::orderBy('sort_order', 'asc')->get()),
             'csrf' => csrf_token(),
             'locale' => fn () => app()->getLocale()
         ];

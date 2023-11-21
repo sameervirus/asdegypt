@@ -26,17 +26,21 @@ use Inertia\Inertia;
 |
 */
 Route::middleware('locale')->group(function() {
-Route::get('/', [WebsiteController::class, 'index']);
-Route::get('/about', [WebsiteController::class, 'about']);
-Route::get('/news', [WebsiteController::class, 'news']);
-Route::get('/news/{slug}', [WebsiteController::class, 'post']);
-Route::get('/reference', [WebsiteController::class, 'reference']);
-Route::get('/distributors', [WebsiteController::class, 'distributors']);
-Route::get('/contact-us', [WebsiteController::class, 'contacts']);
-Route::get('/products', [WebsiteController::class, 'products']);
-Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
-Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
-Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
+    Route::get('/', [WebsiteController::class, 'index']);
+    Route::get('/about', [WebsiteController::class, 'about']);
+    Route::get('/news', [WebsiteController::class, 'news']);
+    Route::get('/news/{slug}', [WebsiteController::class, 'post']);
+    Route::get('/reference', [WebsiteController::class, 'reference']);
+    Route::get('/distributors', [WebsiteController::class, 'distributors']);
+    Route::get('/contact-us', [WebsiteController::class, 'contacts']);
+    Route::get('/products', [WebsiteController::class, 'products']);
+    Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
+    Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
+    Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
+
+    Route::get('/product-registration', [WebsiteController::class, 'create'])->name('registration.create');
+    Route::post('/product-registration', [WebsiteController::class, 'store'])->name('registration.store');
+
 });
 
 Route::post('/lang-switch', [LanguageController::class, 'store'])->name('language.store');
@@ -53,37 +57,50 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('up', function () {
-    $directory = '/home/asdekfkk/public_html/images/';
-    $images = [];
+// Route::get('up', function () {
+//     $directory = '/home/asdekfkk/public_html/images/';
 
-    $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::SELF_FIRST
-    );
+//     $iterator = new RecursiveIteratorIterator(
+//         new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS),
+//         RecursiveIteratorIterator::SELF_FIRST
+//     );
 
-    $ignoredDuplicates = [];
+//     foreach ($iterator as $file) {
+//         if ($file->isFile() && in_array(strtolower($file->getExtension()), ['jpeg','jpg', 'gif', 'png'])) {
+//             $filename = $file->getFilename();
+//             $filepath = $file->getPathName();
+//             // Check if the file ends with _1 to _9 and if it has been added to the array
+//             if (
+//                 preg_match('/_(?:[1-9])\./', $filename) === 0 
+//                 && str_contains($filename, 'large_')
+//                 && !str_contains($file->getPathname(), '/old')) 
+//             {
+//                 $name = str_replace('large_', '', str_replace('.'.$file->getExtension(), '', $filename));
+//                 $product = Product::where('model', $name)->where('published', 0)->first();
+//                 if($product) {
+//                     $product
+//                         ->addMedia($filepath)
+//                         ->preservingOriginal()
+//                         ->withCustomProperties(['fav' => true])
+//                         ->toMediaCollection('images');
+//                     for ($i = 1; $i <= 9; $i++) {
+//                         $new_path = rtrim($filepath, ".jpg") . "_{$i}.jpg";
+//                         if(file_exists($new_path)) {
+//                             $product
+//                                 ->addMedia($new_path)
+//                                 ->preservingOriginal()
+//                                 ->toMediaCollection('images');
+//                         }
+//                     }
+//                     $product->published = 1;
+//                     $product->save();
+//                 }
+//             }
+//         }
+//     }
 
-    foreach ($iterator as $file) {
-        if ($file->isFile() && in_array(strtolower($file->getExtension()), ['jpeg','jpg', 'gif', 'png'])) {
-            $filename = $file->getFilename();
-
-            // Check if the file ends with _1 to _9 and if it has been added to the array
-            if (
-                preg_match('/_(?:[1-9])\./', $filename) === 0 
-                && str_contains($file->getFilename(), 'large_')
-                && !str_contains($file->getPathname(), '/old')) 
-            {
-                // $images[] = $file->getPathname();
-                $name = str_replace('large_', '', str_replace('.'.$file->getExtension(), '', $filename));
-                $product = Product::where('model', $name)->where('publish', 0)->first();
-                break;
-            }
-        }
-    }
-
-    return $product ?? '';
-});
+//     return $filepath ?? '';
+// });
 
 
 

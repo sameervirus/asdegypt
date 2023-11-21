@@ -52,7 +52,7 @@ export default function Category({ agent_products, agent_categories }) {
               ></polyline>
             </svg>
             {locale === "ar"
-              ? agent_products[0].agent
+              ? agent_products[0].agent_ar
               : capitalizeFirstLetter(agent_products[0].agent)}
           </Link>
         </div>
@@ -114,10 +114,10 @@ export default function Category({ agent_products, agent_categories }) {
                       ></Link>
                       <div className="lg:p-5 card-img">
                         <img
-                          src={`https://asdegypt.com/images/${c.agent}/${c.model}/small_${c.model}.jpg`}
+                          src={c.fav_image}
+                          alt={c.model}
                           height="468"
                           width="468"
-                          alt="INVERTER"
                         />
                       </div>
                       <h2 className="text-sm font-semibold ms-4 lg:ms-0">

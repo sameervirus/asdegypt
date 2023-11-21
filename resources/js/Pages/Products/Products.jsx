@@ -27,19 +27,19 @@ export default function Products() {
 
         <div className="container my-24 mx-auto md:px-6">
           <section className="mb-32 text-center">
-            <div className="grid gap-6 lg:grid-cols-3 xl:gap-x-12 p-4">
+            <div className="grid gap-6 lg:grid-cols-4 xl:gap-x-12 p-4">
               {agents &&
                 agents.map((agent) => (
                   <div key={agent.id} className="mb-6 lg:mb-0">
                     <div className="h-full bg-white block relative shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                       <div className="flex">
                         <div
-                          className="bg-cover bg-no-repeat max-h-[200px] overflow-hidden relative"
+                          className="bg-cover bg-no-repeat w-full overflow-hidden relative"
                           data-te-ripple-init
                           data-te-ripple-color="light"
                         >
                           <img
-                            src={`/images/${agent.agent}`}
+                            src={`/images/${agent.agent}.png`}
                             className="w-full"
                           />
                           <Link href={`/products/${agent.agent}`}>

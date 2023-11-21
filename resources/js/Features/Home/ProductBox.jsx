@@ -6,7 +6,9 @@ export default function ProductBox({ product }) {
   const { locale } = usePage().props;
   return (
     <div className="bg-[#fff]">
-      <Link href="/">
+      <Link
+        href={`/products/${product.agent}/${product.category}/${product.model}`}
+      >
         <div className="flex flex-col">
           <div className="flex">
             <div className="p-7 flex flex-col w-1/2">

@@ -23,6 +23,7 @@ function getDistinctObjects(array) {
 export default function Agent({ agent_products }) {
   const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
+  console.log(categories);
   return (
     <>
       <Head
@@ -58,7 +59,7 @@ export default function Agent({ agent_products }) {
         <div className="mt-[-8px] py-5 px-5 lg:py-5 lg:px-10 mb-10 bg-[#00000005]">
           <h1 className="text-primary text-3xl font-bold mb-4">
             {locale === "ar"
-              ? agent_products[0].agent
+              ? agent_products[0].agent_ar
               : capitalizeFirstLetter(agent_products[0].agent)}
           </h1>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -75,10 +76,7 @@ export default function Agent({ agent_products }) {
                         className="overlay absolute top-0 start-0 h-full w-full"
                       ></Link>
                       <div className="lg:p-5 card-img">
-                        <img
-                          src={`https://asdegypt.com/images/${c.agent}/${c.model}/small_${c.model}.jpg`}
-                          alt="INVERTER"
-                        />
+                        <img src={c.fav_image} alt={c.category} />
                       </div>
                       <h2 className="text-sm font-semibold ms-4 lg:ms-0">
                         {locale === "ar"

@@ -13,22 +13,22 @@ export default function Header({ setOpenPanel, setMenuPanel }) {
       <div className="flex-col hidden items-end justify-between lg:flex">
         <div className="flex">
           <LanguageSwitcher />
-          <SearchIcon
+          {/* <SearchIcon
             setOpenPanel={setOpenPanel}
             props="mx-2 bg-[#e1001a] p-2"
             stroke="#ffffff"
-          />
+          /> */}
         </div>
         <div className="flex">
           <MainMenu />
         </div>
       </div>
       <div className="flex gap-2 items-center lg:hidden">
-        <SearchIcon
+        {/* <SearchIcon
           setOpenPanel={setOpenPanel}
           props="text-[#e1001a] p-2"
           stroke="#e1001a"
-        />
+        /> */}
         <a className="" href="#" onClick={() => setMenuPanel(true)}>
           <svg
             className="w-[27px] h-auto"
