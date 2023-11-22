@@ -25,8 +25,8 @@ export default function Products() {
       <AppLayout>
         <Breadcrumb title={__("Products")} items={items} />
 
-        <div className="container my-24 mx-auto md:px-6">
-          <section className="mb-32 text-center">
+        <div className="container lg:my-24 mx-auto md:px-6">
+          <section className="lg:mb-32 text-center">
             <div className="grid gap-6 lg:grid-cols-4 xl:gap-x-12 p-4">
               {agents &&
                 agents.map((agent) => (

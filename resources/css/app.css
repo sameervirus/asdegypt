@@ -248,10 +248,12 @@
 .overlay:hover ~ h2 {
   color: red;
 }
-
+.card-img img {
+  transition: 0.3s ease-out;
+}
 .card .overlay:hover + .card-img img {
   transform: scale(1.2);
-  transition: all 400ms;
+  transition: 0.3s ease-in;
 }
 
 .top-nav {
@@ -259,15 +261,23 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  display: none;
 }
 
 .card-img {
+  width: 100%;
+}
+
+.category-img {
   width: 60px;
 }
 
 @media (min-width: 768px) {
-  .card-img {
+  .category-img {
     width: 100%;
+  }
+  .top-nav {
+    display: block;
   }
 }
 
@@ -288,4 +298,8 @@
 
 .product-registration {
   background-image: url("/images/product-registration.jpg");
+}
+
+.carousel .control-dots .dot {
+  background: #e1001a !important;
 }

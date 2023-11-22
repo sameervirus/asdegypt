@@ -50,7 +50,11 @@ export default function Create() {
     );
 
     if (isFormValid) {
-      router.post("/product-registration", formData);
+      router.post("/product-registration", formData, {
+        onSuccess: (res) => {
+          alert("Success register");
+        },
+      });
     } else {
       // Handle validation error, e.g., show an error message to the user
       alert("Please fill in all required fields.");

@@ -32,7 +32,7 @@ export default function Category({ agent_products, agent_categories }) {
         }
       />
       <AppLayout>
-        <div className="block lg:hidden mt-10 bg-primary text-white">
+        <div className="block lg:hidden bg-primary text-white">
           <Link
             className="flex flex-wrap items-center p-3"
             href={`/products/${agent_products[0].agent}`}
@@ -43,6 +43,7 @@ export default function Category({ agent_products, agent_categories }) {
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
               data-svg="chevron-left"
+              className="back-icon"
             >
               <polyline
                 fill="none"
@@ -99,20 +100,20 @@ export default function Category({ agent_products, agent_categories }) {
                 : capitalizeEachWord(agent_products[0].category)}
             </span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            <div className="col-span-12 lg:col-span-9">
-              <div className="grid grid-cols-1 lg:grid-cols-4 lg:gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-12 lg:gap-4">
+            <div className="col-span-6 lg:col-span-9">
+              <div className="grid grid-cols-2 lg:grid-cols-4 lg:gap-4">
                 {agent_products &&
                   agent_products.map((c) => (
                     <div
                       key={c.id}
-                      className="bg-white card flex items-center lg:block lg:p-5 relative border-b-2 border-[#00000005] lg:border-0"
+                      className="bg-white border-[#00000005] border-b-2 border-l-2 card items-center lg:block lg:border-0 lg:p-5 overflow-hidden relative"
                     >
                       <Link
                         href={`/products/${c.agent}/${c.category}/${c.model}`}
                         className="overlay absolute top-0 start-0 h-full w-full"
                       ></Link>
-                      <div className="lg:p-5 card-img">
+                      <div className="p-5 card-img">
                         <img
                           src={c.fav_image}
                           alt={c.model}
@@ -120,7 +121,7 @@ export default function Category({ agent_products, agent_categories }) {
                           width="468"
                         />
                       </div>
-                      <h2 className="text-sm font-semibold ms-4 lg:ms-0">
+                      <h2 className="text-sm font-semibold mx-2 lg:mx-0 text-center">
                         {locale === "ar"
                           ? c.model_ar
                           : capitalizeEachWord(c.model)}

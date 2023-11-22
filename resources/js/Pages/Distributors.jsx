@@ -53,7 +53,7 @@ export default function Distributors({ distributors }) {
       <AppLayout>
         <Breadcrumb title={__("Distributors")} items={items} />
         <div className="bg-[#f8f8f8] py-4 mb-4">
-          <div className="container my-24 mx-auto md:px-6">
+          <div className="container lg:my-24 mx-auto md:px-6">
             <DataTable
               columns={columns}
               data={distributors}

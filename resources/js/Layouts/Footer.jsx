@@ -9,7 +9,7 @@ export default function Footer() {
     return item.content;
   }
   return (
-    <div id="footer">
+    <div className="mt-10 border-t-4 border-black" id="footer">
       <div className="bg-[#f8f8f8] flex flex-col gap-12 justify-center lg:flex-row lg:p-10 p-2">
         <div className="mb-0 text-sm">
           <strong>{__("SALES AND GALLERY")}</strong>

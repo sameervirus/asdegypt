@@ -9,6 +9,7 @@ use App\Admin\Product\Product;
 use App\Admin\SiteContent\Sitecontent;
 use App\Admin\Slide\Slider;
 use App\Http\Resources\ProductImagesResource;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ class WebsiteController extends Controller
         return Inertia::render('Home', [
             'sliders' => Slider::all(),
             'pages' => Page::all(),
-            'features' => Product::whereIn('id', $ids)->get()
+            'features' => ProductResource::collection(Product::whereIn('id', $ids)->get())
         ]);
     }
 
@@ -82,7 +83,7 @@ class WebsiteController extends Controller
 
     public function agents($agent)
     {
-        $agent_products = Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get();
+        $agent_products = ProductResource::collection(Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get());
         return Inertia::render('Products/Agent', [
             'agent_products' => $agent_products
         ]);
@@ -90,8 +91,8 @@ class WebsiteController extends Controller
 
     public function category($agent, $category)
     {
-        $products = Product::where('agent', $agent)->where('category', $category)->orderBy('id')->get();
-        $categories = Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get();
+        $products = ProductResource::collection(Product::where('agent', $agent)->where('category', $category)->orderBy('id')->get());
+        $categories = ProductResource::collection(Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get());
 
         return Inertia::render('Products/Category', [
             'agent_products' => $products,
@@ -120,6 +121,42 @@ class WebsiteController extends Controller
 
     public function store(Request $request)
     {
-        return $request->all();
+        // Validation rules
+        $rules = [
+            'product' => 'required|string|max:255',
+            'serial' => 'required|string|max:255',
+            'purchase_date' => 'required|date',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'nullable|string',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ];
+
+        // Validate the request data
+        $validatedData = $request->validate($rules);
+        try {
+            // Insert into the database using the DB class
+            DB::table('product_registration')->insert([
+                'product' => $validatedData['product'],
+                'serial' => $validatedData['serial'],
+                'purchase_date' => $validatedData['purchase_date'],
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
+                'city' => $validatedData['city'],
+                'country' => $validatedData['country'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // Assuming the insertion was successful, you can send a success message.
+            return inertia('Product/Create')->with('success', 'Product registered successfully!');
+        } catch (\Exception $e) {
+            // If an exception occurs (e.g., database error), you can send an error message.
+            return inertia('Product/Create')->with('error', 'Failed to register product. Please try again.');
+        } 
     }
 }

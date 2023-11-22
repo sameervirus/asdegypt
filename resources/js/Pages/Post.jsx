@@ -37,12 +37,12 @@ export default function Post({ post }) {
           items={items}
         />
 
-        <div className="container my-24 mx-auto md:px-6">
+        <div className="container lg:my-24 mx-auto md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div>
               <img src={post?.images[0].image} className="w-full" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col p-4">
               <h2 className="text-3xl font-medium">
                 {locale === "ar" ? post.title_ar : post.title}
               </h2>

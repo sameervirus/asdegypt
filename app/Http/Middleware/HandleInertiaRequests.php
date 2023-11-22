@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'site_content' => $site_content,
             'language' => fn () => translations(base_path('lang/' . app()->getLocale() . '.json')),
-            'products' => ProductResource::collection(Product::orderBy('sort_order', 'asc')->get()),
+            'products' => ProductResource::collection(Product::orderBy('sort_order', 'asc')->groupBy('agent')->get()),
             'csrf' => csrf_token(),
             'locale' => fn () => app()->getLocale()
         ];

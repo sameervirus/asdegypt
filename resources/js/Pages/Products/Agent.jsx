@@ -32,7 +32,7 @@ export default function Agent({ agent_products }) {
         }
       />
       <AppLayout>
-        <div className="block lg:hidden mt-10 bg-primary text-white">
+        <div className="block lg:hidden bg-primary text-white">
           <Link className="flex flex-wrap items-center p-3" href={`/products`}>
             <svg
               width="20"
@@ -40,6 +40,7 @@ export default function Agent({ agent_products }) {
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
               data-svg="chevron-left"
+              className="back-icon"
             >
               <polyline
                 fill="none"
@@ -69,13 +70,13 @@ export default function Agent({ agent_products }) {
                   agent_products.map((c) => (
                     <div
                       key={c.id}
-                      className="bg-white card flex items-center lg:block lg:p-5 relative border-b-2 border-[#00000005] lg:border-0"
+                      className="bg-white card flex items-center lg:block lg:p-5 relative border-b-2 border-[#00000005] lg:border-0 overflow-hidden"
                     >
                       <Link
                         href={`/products/${c.agent}/${c.category}`}
                         className="overlay absolute top-0 start-0 h-full w-full"
                       ></Link>
-                      <div className="lg:p-5 card-img">
+                      <div className="lg:p-5 card-img category-img">
                         <img src={c.fav_image} alt={c.category} />
                       </div>
                       <h2 className="text-sm font-semibold ms-4 lg:ms-0">

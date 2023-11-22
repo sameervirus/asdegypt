@@ -10,8 +10,8 @@ export default function ProductBox({ product }) {
         href={`/products/${product.agent}/${product.category}/${product.model}`}
       >
         <div className="flex flex-col">
-          <div className="flex">
-            <div className="p-7 flex flex-col w-1/2">
+          <div className="flex flex-col lg:flex-row">
+            <div className="p-7 flex flex-col lg:w-1/2">
               <span className="text-primary font-bold uppercase text-sm">
                 {locale === "ar"
                   ? product.agent_ar
@@ -34,7 +34,7 @@ export default function ProductBox({ product }) {
                 }}
               ></p>
             </div>
-            <div className="p-7">
+            <div className="flex justify-center p-7">
               <img
                 height="240px"
                 width="240px"

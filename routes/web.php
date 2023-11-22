@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Slide\SliderController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -102,7 +103,9 @@ require __DIR__ . '/auth.php';
 //     return $filepath ?? '';
 // });
 
-
+Route::get('test', function() {
+    return new ProductResource(Product::where('id', 33)->first());
+});
 
 Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::get("/", [SitecontentController::class, 'index']);

@@ -12,17 +12,19 @@ export default function MainSlider({ sliders }) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="p-10 bg-[#f8f8f8]">
+    <div className="p-2 lg:p-10 bg-[#f8f8f8]">
       <Carousel
         showArrows={true}
         showStatus={false}
         showIndicators={false}
         showThumbs={false}
         className="carouselClass"
+        emulateTouch={false}
+        swipeable={false}
       >
         {sliders?.map((slide) => (
           <div key={slide.id} className="grid lg:grid-cols-2 lg:gap-4">
-            <div className="mt-[70px] lg:mt-[140px] ms-[40px] lg:ms-[70px] p-10 text-start">
+            <div className="mt-[70px] lg:mt-[140px] ms-[40px] lg:ms-[70px] p-5 lg:p-10 text-start rtl:text-right">
               <h2 className="text-xl lg:text-4xl uppercase mb-4">
                 {locale === "ar" ? slide.header_ar : slide.header}
               </h2>

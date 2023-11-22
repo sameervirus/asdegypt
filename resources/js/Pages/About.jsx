@@ -42,7 +42,7 @@ export default function About({ pages }) {
 
         <div className="">
           <ul
-            className="about-tabs flex flex-wrap -mb-px text-sm font-bold uppercase text-center px-5 lg:px-10"
+            className="about-tabs flex flex-wrap -mb-px text-sm font-bold uppercase text-center lg:px-10"
             id="default-tab"
             role="tablist"
           >

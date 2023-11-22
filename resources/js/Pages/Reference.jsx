@@ -30,7 +30,7 @@ export default function Reference({ pages }) {
       <AppLayout>
         <Breadcrumb title={__("Reference")} items={items} />
         <div className="bg-[#f8f8f8] py-4 mb-4">
-          <div className="container my-24 mx-auto md:px-6">
+          <div className="container lg:my-24 p-4 mx-auto md:px-6">
             <h1 className="text-primary text-3xl text-center mb-10">
               {__("PreWork")}
             </h1>

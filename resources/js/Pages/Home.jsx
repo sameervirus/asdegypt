@@ -3,12 +3,12 @@ import MainSlider from "@/Features/Home/MainSlider";
 import RedBanner from "@/Features/Home/RedBanner";
 import ServiceSection from "@/Features/Home/ServiceSection";
 import AppLayout from "@/Layouts/AppLayout";
-import { Link, Head } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 
 export default function Welcome({ sliders, pages, features }) {
   return (
     <>
-      <Head title="Welcome" />
+      <Head title="Home" />
       <AppLayout>
         <MainSlider sliders={sliders} />
         <RedBanner pages={pages} />
