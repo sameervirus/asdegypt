@@ -93,7 +93,7 @@ class SitecontentController extends Controller
             if ($handle->uploaded) {
               $handle->image_resize         = true;
               $handle->image_ratio_x        = true;
-              $handle->image_y              = 160 / $i;
+              $handle->image_y              = 320 / $i;
               $handle->process('images');
               
               if ($handle->processed) {

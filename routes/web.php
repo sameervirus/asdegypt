@@ -144,4 +144,7 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::get("/feedbacks", [AdminController::class, "feedbacks"])->name(
         "feedbacks.index"
     );
+    Route::get("/products-registration", [AdminController::class, "products_registration"])->name(
+        "products_registration"
+    );
 });

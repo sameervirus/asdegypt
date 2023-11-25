@@ -123,40 +123,40 @@ class WebsiteController extends Controller
     {
         // Validation rules
         $rules = [
-            'product' => 'required|string|max:255',
             'serial' => 'required|string|max:255',
             'purchase_date' => 'required|date',
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
-            'address' => 'nullable|string',
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'files.*' => 'nullable|file|mimes:jpeg,png,mp4|max:5120', // 5 MB limit
         ];
 
         // Validate the request data
         $validatedData = $request->validate($rules);
+
         try {
+            // Handle file uploads
+            $filePaths = [];
+            if ($request->hasFile('files')) {
+                foreach ($request->file('files') as $file) {
+                    $fileName = $file->store('public/product_files'); // Store file in storage/app/product_files
+                    $filePaths[] = str_replace('public/', '', $fileName);
+                }
+            }
+
             // Insert into the database using the DB class
-            DB::table('product_registration')->insert([
-                'product' => $validatedData['product'],
+            $productId = DB::table('product_registration')->insertGetId([
                 'serial' => $validatedData['serial'],
                 'purchase_date' => $validatedData['purchase_date'],
                 'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
-                'address' => $validatedData['address'],
-                'city' => $validatedData['city'],
-                'country' => $validatedData['country'],
+                'files' => json_encode($filePaths), // Store file paths in the 'files' column
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
             // Assuming the insertion was successful, you can send a success message.
-            return inertia('Product/Create')->with('success', 'Product registered successfully!');
+            return inertia('Registration/Create')->with('success', 'Product registered successfully!');
         } catch (\Exception $e) {
             // If an exception occurs (e.g., database error), you can send an error message.
-            return inertia('Product/Create')->with('error', 'Failed to register product. Please try again.');
-        } 
+            return inertia('Registration/Create')->with('error', 'Failed to register product. Please try again.');
+        }
     }
 }

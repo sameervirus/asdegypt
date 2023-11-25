@@ -41,6 +41,7 @@
                     <li><a href="{{route('posts.index')}}">News & Events</a></li>
                     <li><a href="{{route('distributors.index')}}">Distributors موزعين</a></li>
                     <li><a href="{{route('feedbacks.index')}}">رسائل الموقع</a></li>
+                    <li><a href="{{route('products_registration')}}">تسجيل المنتجات</a></li>
                 </ul>
             </li>
 

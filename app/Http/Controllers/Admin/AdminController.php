@@ -127,6 +127,12 @@ class AdminController extends Controller
         return view('admin.feedbacks.index', compact('items')); 
     }
 
+    public function products_registration()
+    {
+        $registeredProducts = \DB::table('product_registration')->paginate(15);
+        return view('admin.register_products', compact('registeredProducts')); 
+    }
+
     public function favimg(Request $request)
     {
         $product = Product::findOrFail($request->id);
