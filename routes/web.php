@@ -109,6 +109,8 @@ Route::get('test', function() {
 
 Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::get("/", [SitecontentController::class, 'index']);
+    Route::get("/agents", [SitecontentController::class, 'create']);
+    Route::post("/agents", [SitecontentController::class, 'changeImage']);
 
     Route::post("/reorder", [AdminController::class, "reorder"])->name("reorder");
     Route::post("/preorder", [AdminController::class, "preorder"])->name(

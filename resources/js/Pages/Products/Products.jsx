@@ -39,7 +39,9 @@ export default function Products() {
                           data-te-ripple-color="light"
                         >
                           <img
-                            src={`/images/${agent.agent}.png`}
+                            src={`/images/${agent.agent}.png?v=${Math.floor(
+                              new Date().getTime() / 1000,
+                            )}`}
                             className="w-full"
                           />
                           <Link href={`/products/${agent.agent}`}>

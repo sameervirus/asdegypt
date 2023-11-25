@@ -6,6 +6,7 @@ use App\Admin\SiteContent\Sitecontent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Classes\Upload;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SitecontentController extends Controller
@@ -34,7 +35,39 @@ class SitecontentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.agent');
+    }
+
+    public function changeImage(Request $request)
+    {
+        $massage = 'Successfully nothing';
+
+        if(is_file('images/'. $request->agent_name . '.png')) {
+            unlink('images/'. $request->agent_name . '.png');
+        }
+
+        if($request->file('file')){
+            
+            $handle = new Upload($request->file('file'));
+            
+            if ($handle->uploaded) {
+              $handle->image_resize         = true;
+              $handle->image_ratio_x        = true;
+              $handle->image_y              = 264;
+              $handle->file_new_name_body   = $request->agent_name;
+              $handle->image_convert        = "png";
+              $handle->process('images');
+              
+              if ($handle->processed) {
+                $massage = 'Successfully Added';
+                $handle->clean();  
+              } else {
+                $massage = 'error : ' . $handle->error;
+              }
+            }
+        }
+
+        return back()->with('message', $massage);
     }
 
     /**

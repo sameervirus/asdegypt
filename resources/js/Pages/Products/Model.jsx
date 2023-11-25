@@ -312,6 +312,22 @@ export default function Model({ product, agent_products, images, fav_image }) {
                     )}
                   </div>
                 </div>
+                {product.data_sheet && (
+                  <div className="block mx-4 lg:hidden">
+                    <h3 className="mb-4 font-bold text-2xl text-primary">
+                      {__("Data Sheets")}:
+                    </h3>
+                    <div id="">
+                      <a
+                        href={`//${product.data_sheet}`}
+                        target="_blank"
+                        className="underline"
+                      >
+                        {__("Download")}
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="hidden lg:flex lg:col-span-3">

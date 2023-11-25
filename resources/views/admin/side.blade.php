@@ -27,6 +27,7 @@
 
             <li><a><i class="fa fa-file-powerpoint-o"></i>Static Pages<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
+                    <li><a href="{{url('/admin/agents')}}">Agents Images</a></li>
                     @foreach($pages as $page)
                     @continue($page->page == 'video')
                     <li><a href="{{route('pages.edit',$page->page)}}">{{Str::title($page->page)}}</a></li>
