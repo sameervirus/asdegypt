@@ -31,7 +31,7 @@ export default function Products() {
               {agents &&
                 agents.map((agent) => (
                   <div key={agent.id} className="mb-6 lg:mb-0">
-                    <div className="h-full bg-white block relative shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
+                    <div className="h-full block relative">
                       <div className="flex">
                         <div
                           className="bg-cover bg-no-repeat w-full overflow-hidden relative"

@@ -10,6 +10,7 @@ use App\Admin\SiteContent\Sitecontent;
 use App\Admin\Slide\Slider;
 use App\Http\Resources\ProductImagesResource;
 use App\Http\Resources\ProductResource;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -92,11 +93,9 @@ class WebsiteController extends Controller
     public function category($agent, $category)
     {
         $products = ProductResource::collection(Product::where('agent', $agent)->where('category', $category)->orderBy('id')->get());
-        $categories = ProductResource::collection(Product::where('agent', $agent)->groupBy('category')->orderBy('id')->get());
 
         return Inertia::render('Products/Category', [
             'agent_products' => $products,
-            'agent_categories' => $categories
         ]);
     }
 
@@ -111,6 +110,26 @@ class WebsiteController extends Controller
             'agent_products' => $products,
             'images' => ProductImagesResource::collection($product->getMedia('images')),
             'fav_image' => $image ? $image->getFullUrl() : null
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $products = Product::query();
+        $name = '';
+        
+        if($request->has('tag'))
+        {
+            $tag = Tag::where('slug', $request->tag)->first();
+            $name = App::getLocale() == 'ar' ? $tag->name_arabic : $tag->name_english;
+            $products->whereHas('tags', function ($q) use ($request) {
+                $q->where('slug', $request->tag);
+            });
+        }
+
+        return Inertia::render('Products/Search', [
+            'name' => $name,
+            'agent_products' => ProductResource::collection($products->get()),
         ]);
     }
 

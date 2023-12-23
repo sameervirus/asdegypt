@@ -33,3 +33,20 @@ export const decodeHTML = (html) => {
   txt.innerHTML = html;
   return txt.value;
 };
+
+export const getUniqueTags = (data) => {
+  const uniqueTagsSet = new Set();
+  data.forEach((item) => {
+    if (Array.isArray(item.tags)) {
+      item.tags.forEach((tag) => {
+        const tagInfo = {
+          slug: tag.slug,
+          englishName: tag.name_english,
+          arabicName: tag.name_arabic,
+        };
+        uniqueTagsSet.add(JSON.stringify(tagInfo));
+      });
+    }
+  });
+  return [...uniqueTagsSet].map(JSON.parse);
+};

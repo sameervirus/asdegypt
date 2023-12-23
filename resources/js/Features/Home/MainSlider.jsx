@@ -21,6 +21,9 @@ export default function MainSlider({ sliders }) {
         className="carouselClass"
         emulateTouch={false}
         swipeable={false}
+        autoPlay
+        infiniteLoop
+        interval={5000}
       >
         {sliders?.map((slide) => (
           <div key={slide.id} className="grid lg:grid-cols-2 lg:gap-4">

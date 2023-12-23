@@ -65,6 +65,11 @@ export default function MobileMenu({ setMenuPanel }) {
 
         <ul className="mobile-menu">
           <li>
+            <Link href="/product-registration">
+              {__("Product Registration")}
+            </Link>
+          </li>
+          <li>
             <Link href="/distributors">{__("Distributors")}</Link>
           </li>
           <li>

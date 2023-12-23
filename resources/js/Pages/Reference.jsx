@@ -4,6 +4,7 @@ import AppLayout from "@/Layouts/AppLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
 import parse from "html-react-parser";
 import { __ } from "@/Util/lang";
+import Banner from "@/Components/Banner";
 
 export default function Reference({ pages }) {
   const items = [
@@ -29,8 +30,9 @@ export default function Reference({ pages }) {
       <Head title={__("Reference")} />
       <AppLayout>
         <Breadcrumb title={__("Reference")} items={items} />
+        <Banner image="reference_banner" />
         <div className="bg-[#f8f8f8] py-4 mb-4">
-          <div className="container lg:my-24 p-4 mx-auto md:px-6">
+          <div className="container lg:my-12 p-4 mx-auto md:px-6">
             <h1 className="text-primary text-3xl text-center mb-10">
               {__("PreWork")}
             </h1>

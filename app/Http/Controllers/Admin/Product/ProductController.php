@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Admin\Product\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use \Verot\Upload\Upload as UploadClass;
 use Str;
 
@@ -71,6 +72,7 @@ class ProductController extends Controller
         ]);
 
         if($product) {
+            $product->tags()->sync($request->tags);
           if($request->file('file')){
               $fileAdders = $product
               ->addMultipleMediaFromRequest(['file'])
@@ -113,7 +115,9 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.products.edit', ['item' => $product]);
+        $pt = $product->tags->pluck('id')->toArray();
+        $tags = Tag::all();
+        return view('admin.products.edit', ['item' => $product, 'pt' => $pt, 'tags', $tags]);
     }
 
     /**
@@ -149,6 +153,7 @@ class ProductController extends Controller
         $item->optional_ar = $request->optional_ar;
 
         if($item->save()) {
+            $item->tags()->sync($request->tags);
             if($request->file('file')){
                 $fileAdders = $item
                 ->addMultipleMediaFromRequest(['file'])

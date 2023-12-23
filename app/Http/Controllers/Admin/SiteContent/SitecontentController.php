@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\SiteContent;
 
+use App\Admin\Product\Product;
 use App\Admin\SiteContent\Sitecontent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class SitecontentController extends Controller
             if ($handle->uploaded) {
               $handle->image_resize         = true;
               $handle->image_ratio_x        = true;
-              $handle->image_y              = 264;
+              $handle->image_y              = 250;
               $handle->file_new_name_body   = $request->agent_name;
               $handle->image_convert        = "png";
               $handle->process('images');
@@ -121,9 +122,10 @@ class SitecontentController extends Controller
      * @param  \App\Admin\SiteContent\Sitecontent  $sitecontent
      * @return \Illuminate\Http\Response
      */
-    public function show(Sitecontent $sitecontent)
+    public function show(Request $request)
     {
-        //
+        $categories = $request->has('agent') ? Product::where('agent', $request->agent)->groupBy('category')->get() : null;
+        return view('admin.products.category', ['categories' => $categories]);
     }
 
     /**
@@ -134,7 +136,7 @@ class SitecontentController extends Controller
      */
     public function edit(Sitecontent $sitecontent)
     {
-        //
+        return view('admin.banner');
     }
 
     /**

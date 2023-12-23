@@ -4,9 +4,12 @@ import React from "react";
 import {
   capitalizeEachWord,
   capitalizeFirstLetter,
+  getUniqueTags,
   toTitleCase,
 } from "@/Util/Helpers";
 import ProductHead from "@/Features/ProductHead";
+import ImageCard from "./ImageCard";
+import Tag from "./Tag";
 
 function getDistinctObjects(array) {
   const uniqueIds = new Set();
@@ -19,7 +22,7 @@ function getDistinctObjects(array) {
   });
 }
 
-export default function Category({ agent_products, agent_categories }) {
+export default function Category({ agent_products }) {
   const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
   return (
@@ -104,62 +107,21 @@ export default function Category({ agent_products, agent_categories }) {
             <div className="col-span-6 lg:col-span-9">
               <div className="grid grid-cols-2 lg:grid-cols-4 lg:gap-4">
                 {agent_products &&
-                  agent_products.map((c) => (
-                    <div
-                      key={c.id}
-                      className="bg-white border-[#00000005] border-b-2 border-l-2 card items-center lg:block lg:border-0 lg:p-5 overflow-hidden relative"
-                    >
-                      <Link
-                        href={`/products/${c.agent}/${c.category}/${c.model}`}
-                        className="overlay absolute top-0 start-0 h-full w-full"
-                      ></Link>
-                      <div className="p-5 card-img">
-                        <img
-                          src={c.fav_image}
-                          alt={c.model}
-                          height="468"
-                          width="468"
-                        />
-                      </div>
-                      <h2 className="text-sm font-semibold mx-2 lg:mx-0 text-center">
-                        {locale === "ar"
-                          ? c.model_ar
-                          : capitalizeEachWord(c.model)}
-                      </h2>
-                    </div>
-                  ))}
+                  agent_products.map((c) =>
+                    c.fav_image !== null ? (
+                      <ImageCard
+                        key={c.id}
+                        locale={locale}
+                        url={`/products/${c.agent}/${c.category}/${c.model}`}
+                        favImage={c.fav_image}
+                        name={c.model}
+                        name_ar={c.model_ar}
+                      />
+                    ) : null,
+                  )}
               </div>
             </div>
-            <div className="hidden lg:flex lg:col-span-3">
-              <div className="w-full p-5 bg-white relative">
-                <ul>
-                  <li className="underline font-bold text-2xl mb-2">
-                    {locale === "ar"
-                      ? agent_products[0].agent_ar
-                      : capitalizeFirstLetter(agent_products[0].agent)}
-                  </li>
-                  {agent_categories?.map((p) => (
-                    <li
-                      key={p.id}
-                      className="py-1 hover:text-primary uppercase font-semibold"
-                    >
-                      <Link
-                        className={
-                          p.category === agent_products[0].category
-                            ? "text-primary"
-                            : ""
-                        }
-                        href={`/products/${p.agent}/${p.category}`}
-                      >
-                        {locale === "ar"
-                          ? p.category_ar
-                          : toTitleCase(p.category)}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <Tag locale={locale} tags={getUniqueTags(agent_products)} />
           </div>
         </div>
       </AppLayout>

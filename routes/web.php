@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\SiteContent\SitecontentController;
 use App\Http\Controllers\Admin\Slide\SliderController;
+use App\Http\Controllers\Admin\TagAdminController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
@@ -38,6 +39,8 @@ Route::middleware('locale')->group(function() {
     Route::get('/products/{agent}', [WebsiteController::class, 'agents']);
     Route::get('/products/{agent}/{category}', [WebsiteController::class, 'category']);
     Route::get('/products/{agent}/{category}/{model}', [WebsiteController::class, 'model']);
+
+    Route::get('/search', [WebsiteController::class, 'search']);
 
     Route::get('/product-registration', [WebsiteController::class, 'create'])->name('registration.create');
     Route::post('/product-registration', [WebsiteController::class, 'store'])->name('registration.store');
@@ -111,6 +114,8 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::get("/", [SitecontentController::class, 'index']);
     Route::get("/agents", [SitecontentController::class, 'create']);
     Route::post("/agents", [SitecontentController::class, 'changeImage']);
+    Route::get("/categories", [SitecontentController::class, 'show'])->name('categories');
+    Route::get("/banners", [SitecontentController::class, 'edit'])->name('banners');
 
     Route::post("/reorder", [AdminController::class, "reorder"])->name("reorder");
     Route::post("/preorder", [AdminController::class, "preorder"])->name(
@@ -126,6 +131,7 @@ Route::group(["middleware" => ["auth"], "prefix" => "admin"], function () {
     Route::resource("posts", PostController::class);
     Route::resource("sitecontent", SitecontentController::class);
     Route::resource("products", ProductController::class);
+    Route::resource("tags", TagAdminController::class, ['as' => 'admin']);
     Route::post("/wdelimg", [AdminController::class, "wdelimg"])->name("wdelimg");
     Route::post("/pdelimg", [AdminController::class, "pdelimg"])->name("pdelimg");
     Route::post("/favimg", [AdminController::class, "favimg"])->name("favimg");

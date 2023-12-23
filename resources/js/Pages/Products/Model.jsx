@@ -49,8 +49,6 @@ export default function Model({ product, agent_products, images, fav_image }) {
     }
   };
 
-  console.log(images);
-
   return (
     <>
       <Head

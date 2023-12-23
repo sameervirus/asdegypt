@@ -3,6 +3,8 @@
 @section('title', 'Products')
 
 @section ('cssFiles')
+<link rel="stylesheet" href="{{asset('vendors/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{asset('vendors/select2/dist/css/select2.min.css')}}" type="text/css"/>
     <style type="text/css">
       .inputfile {
         width: 0.1px;
@@ -154,6 +156,8 @@
     <!-- iCheck -->
     <script src="{{asset('vendors/iCheck/icheck.min.js')}}"></script>
     <script src="{{asset('vendors/tinymce/js/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{asset('vendors/select2/dist/js/select2.min.js')}}"></script>
+
     <script type="text/javascript">
       
       function readURL(input, id) {
@@ -173,7 +177,9 @@
           readURL(this, img);
       });
 
-
+        $(document).ready(function() {
+            $('#tags').select2();
+        });
 
       tinymce.init({
           selector: 'textarea',

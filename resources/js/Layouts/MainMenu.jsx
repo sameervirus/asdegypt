@@ -8,7 +8,7 @@ export default function MainMenu() {
   const categories = getDistinctObjects(products);
   return (
     <>
-      <ul className="menu-top flex me-10">
+      <ul className="menu-top flex">
         <li>
           <Link href="/products">{__("Products")}</Link>
           <div>
@@ -33,6 +33,9 @@ export default function MainMenu() {
         </li>
       </ul>
       <ul className="menu-top flex">
+        <li>
+          <Link href="/product-registration">{__("Product Registration")}</Link>
+        </li>
         <li>
           <Link href="/distributors">{__("Distributors")}</Link>
         </li>

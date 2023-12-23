@@ -71,6 +71,18 @@
 </div>
 
 <div class="form-group">
+    <label for="tags" class="col-md-2 control-label">tags المجالات</label>
+
+    <div class="col-md-10">
+        <select class="form-control" id="tags" name="tags[]" multiple="multiple">
+            @foreach(\App\Models\Tag::all() as $tag)
+            <option value="{{$tag->id}}" {{in_array($tag->id, @$pt ?? []) ? 'selected' : ''}}>{{ $tag->name }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
     <label for="data_sheet" class="col-md-2 control-label">Data Sheet التحميلات</label>
 
     <div class="col-md-10">

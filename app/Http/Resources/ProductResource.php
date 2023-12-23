@@ -34,6 +34,7 @@ class ProductResource extends JsonResource
             'sort_order' => $this->sort_order,
             'technical_data' => $this->technical_data,
             'technical_data_ar' => $this->technical_data_ar,
+            'tags' => $this->tags,
             'fav_image' => optional($this->getMedia('images')->where('custom_properties.fav', true)->first())->getUrl(),
             'images' => ProductImagesResource::collection($this->getMedia('images'))
         ];

@@ -15,7 +15,7 @@ export default function ProductHead({ categories, agent_products, locale }) {
             <li
               key={cat.id}
               className={`ml-[1px] ${
-                cat.agent === agent_products[0].agent ? "active" : ""
+                cat.agent === agent_products[0]?.agent ? "active" : ""
               }`}
               role="presentation"
             >
