@@ -43,7 +43,7 @@ export default function MobileMenu({ setMenuPanel }) {
       </div>
       <div className="mb-4">
         <div className="bg-white text-gray-500">
-          <strong className="text-[9px]">{__("Products")}</strong>
+          <strong className="text-[12px]">{__("Products")}</strong>
         </div>
 
         <ul className="mobile-menu">
@@ -60,7 +60,7 @@ export default function MobileMenu({ setMenuPanel }) {
       </div>
       <div className="mb-4">
         <div className="bg-white text-gray-500">
-          <strong className="text-[9px]">{__("Company")}</strong>
+          <strong className="text-[12px]">{__("Company")}</strong>
         </div>
 
         <ul className="mobile-menu">

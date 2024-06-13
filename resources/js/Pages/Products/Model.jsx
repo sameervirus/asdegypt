@@ -76,7 +76,7 @@ export default function Model({ product, agent_products, images, fav_image }) {
                   role="presentation"
                 >
                   <Link
-                    className={`inline-block px-4 py-2 uppercase hover:text-primary ${cat.agent}`}
+                    className={`inline-block px-4 py-2 uppercase hover:text-primary`}
                     href={`/products/${cat.agent}`}
                   >
                     {locale === "ar"

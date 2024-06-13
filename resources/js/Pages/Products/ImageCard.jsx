@@ -11,7 +11,7 @@ export default function ImageCard({ locale, url, name_ar, favImage, name }) {
       ></Link>
       <div className="card-img category-img">
         <img
-          src={`/images/${favImage}.png`}
+          src={favImage}
           alt={name}
           onError={(e) => {
             e.target.src = "/images/250x250-Placeholder.png";

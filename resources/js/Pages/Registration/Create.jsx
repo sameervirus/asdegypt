@@ -18,6 +18,7 @@ export default function Create() {
   const formRef = useRef();
   const [formData, setFormData] = useState({
     serial: "",
+    invoice: "",
     purchaseDate: "",
     name: "",
     files: [],
@@ -50,7 +51,13 @@ export default function Create() {
     e.preventDefault();
 
     // Server-side validation
-    const requiredFields = ["serial", "purchaseDate", "name", "files"];
+    const requiredFields = [
+      "serial",
+      "invoice",
+      "purchaseDate",
+      "name",
+      "files",
+    ];
     const isFormValid = requiredFields.every((field) => {
       const value = formData[field];
       if (typeof value === "string") {
@@ -65,6 +72,7 @@ export default function Create() {
     if (isFormValid && isFilesValid) {
       const formDataToSend = new FormData();
       formDataToSend.append("serial", formData.serial);
+      formDataToSend.append("invoice", formData.invoice);
       formDataToSend.append("purchase_date", formData.purchaseDate);
       formDataToSend.append("name", formData.name);
 
@@ -77,6 +85,7 @@ export default function Create() {
         onSuccess: (res) => {
           setFormData({
             serial: "",
+            invoice: "",
             purchaseDate: "",
             name: "",
             files: [],
@@ -101,7 +110,7 @@ export default function Create() {
       <Head title={__("Product Registration")} />
       <AppLayout>
         <Breadcrumb title={__("Product Registration")} items={items} />
-        <div className="container mx-auto mt-8 max-w-2xl">
+        <div className="container mx-auto mt-8 max-w-2xl p-2">
           <form ref={formRef} onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
@@ -118,6 +127,24 @@ export default function Create() {
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded-md w-full"
               />
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="mb-4">
+                <label
+                  htmlFor="invoice"
+                  className="block text-sm font-medium text-gray-600"
+                >
+                  {__("invoice")}
+                </label>
+                <input
+                  type="text"
+                  id="invoice"
+                  name="invoice"
+                  value={formData.invoice}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border rounded-md w-full"
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="mb-4">

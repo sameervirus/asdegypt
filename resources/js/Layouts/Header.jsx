@@ -7,7 +7,7 @@ import MainMenu from "./MainMenu";
 export default function Header({ setOpenPanel, setMenuPanel }) {
   return (
     <div className="flex justify-between lg:px-10 px-2 py-1">
-      <div className="">
+      <div className="lg:max-w-[50%]">
         <ApplicationLogo />
       </div>
       <div className="flex-col hidden items-end justify-between lg:flex">

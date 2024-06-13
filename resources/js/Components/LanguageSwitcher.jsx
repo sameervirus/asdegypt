@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
   return (
     <ul className="menu-top flex">
       <li>
-        <button onClick={() => handleChangeLanguage("en")}>Eg</button>
+        <button onClick={() => handleChangeLanguage("en")}>En</button>
       </li>
       <li>
         <button onClick={() => handleChangeLanguage("ar")}>Ar</button>

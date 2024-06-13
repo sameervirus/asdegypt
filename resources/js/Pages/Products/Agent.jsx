@@ -25,6 +25,7 @@ function getDistinctObjects(array) {
 export default function Agent({ agent_products }) {
   const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
+  console.log(agent_products);
 
   return (
     <>
@@ -74,7 +75,7 @@ export default function Agent({ agent_products }) {
                       key={c.id}
                       locale={locale}
                       url={`/products/${c.agent}/${c.category}`}
-                      favImage={c.category}
+                      favImage={`${c.category}.png`}
                       name={c.category}
                       name_ar={c.category_ar}
                     />

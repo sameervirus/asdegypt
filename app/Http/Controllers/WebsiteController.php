@@ -71,7 +71,7 @@ class WebsiteController extends Controller
     public function contacts()
     {
         $locale = App::getLocale();
-            $site_content = Sitecontent::where('lang', $locale)->pluck('content', 'code');
+        $site_content = Sitecontent::where('lang', $locale)->pluck('content', 'code');
         return Inertia::render('Contacts', [
             'data' => $site_content
         ]);
@@ -117,9 +117,8 @@ class WebsiteController extends Controller
     {
         $products = Product::query();
         $name = '';
-        
-        if($request->has('tag'))
-        {
+
+        if ($request->has('tag')) {
             $tag = Tag::where('slug', $request->tag)->first();
             $name = App::getLocale() == 'ar' ? $tag->name_arabic : $tag->name_english;
             $products->whereHas('tags', function ($q) use ($request) {
@@ -142,7 +141,8 @@ class WebsiteController extends Controller
     {
         // Validation rules
         $rules = [
-            'serial' => 'required|string|max:255',
+            'invoice' => 'required|string|max:255',
+            'serial' => 'required|string|max:255|unique:product_registration',
             'purchase_date' => 'required|date',
             'name' => 'required|string|max:255',
             'files.*' => 'nullable|file|mimes:jpeg,png,mp4|max:5120', // 5 MB limit
@@ -164,6 +164,7 @@ class WebsiteController extends Controller
             // Insert into the database using the DB class
             $productId = DB::table('product_registration')->insertGetId([
                 'serial' => $validatedData['serial'],
+                'invoice' => $validatedData['invoice'],
                 'purchase_date' => $validatedData['purchase_date'],
                 'name' => $validatedData['name'],
                 'files' => json_encode($filePaths), // Store file paths in the 'files' column

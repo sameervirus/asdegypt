@@ -36,6 +36,7 @@ class ProductResource extends JsonResource
             'technical_data_ar' => $this->technical_data_ar,
             'tags' => $this->tags,
             'fav_image' => optional($this->getMedia('images')->where('custom_properties.fav', true)->first())->getUrl(),
+            'fav_image_thumbnail' => optional($this->getMedia('images')->where('custom_properties.fav', true)->first())->getUrl('thumb'),
             'images' => ProductImagesResource::collection($this->getMedia('images'))
         ];
     }

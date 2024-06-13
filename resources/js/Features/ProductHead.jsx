@@ -20,7 +20,7 @@ export default function ProductHead({ categories, agent_products, locale }) {
               role="presentation"
             >
               <Link
-                className={`inline-block px-4 py-2 uppercase hover:text-primary ${cat.agent}`}
+                className={`inline-block px-4 py-2 uppercase hover:text-primary`}
                 href={`/products/${cat.agent}`}
               >
                 {locale === "ar" ? cat.agent_ar : cat.agent?.replace("_", " ")}

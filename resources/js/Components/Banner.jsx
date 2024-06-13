@@ -6,7 +6,7 @@ export default function Banner({ image }) {
       <img
         src={`/images/${image}.png`}
         alt="Ad Banner"
-        className="mx-auto min-w-full max-h-[100px]"
+        className="mx-auto min-w-full"
       />
     </div>
   );
