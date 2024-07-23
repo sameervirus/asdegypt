@@ -25,6 +25,7 @@ function getDistinctObjects(array) {
 export default function Agent({ agent_products }) {
   const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
+  console.log(agent_products);
 
   return (
     <>

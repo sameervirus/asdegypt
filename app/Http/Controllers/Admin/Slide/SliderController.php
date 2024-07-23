@@ -57,9 +57,8 @@ class SliderController extends Controller
 
     if ($handle->uploaded) {
       $handle->image_resize         = true;
-      $handle->image_ratio_crop     = true;
-      $handle->image_x              = 500;
-      $handle->image_y              = 500;
+      $handle->image_ratio_x        = true;
+      $handle->image_y              = 648;
       $handle->process('images/slider');
 
       if ($handle->processed) {
@@ -132,9 +131,8 @@ class SliderController extends Controller
 
       if ($handle->uploaded) {
         $handle->image_resize         = true;
-        $handle->image_ratio_crop     = true;
-        $handle->image_x              = 500;
-        $handle->image_y              = 500;
+        $handle->image_ratio_x        = true;
+        $handle->image_y              = 648;
         $handle->process('images/slider');
 
         if ($handle->processed) {

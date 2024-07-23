@@ -1,6 +1,7 @@
 import { __ } from "@/Util/lang";
 import { usePage } from "@inertiajs/react";
 import React from "react";
+import CopyRight from "./CopyRight";
 
 export default function Footer() {
   const { site_content, locale } = usePage().props;
@@ -185,9 +186,7 @@ export default function Footer() {
           </a>
         )}
       </div>
-      <div className="flex gap-12 justify-center lg:px-10 p-2 lg:py-4 text-sm bg-[#e1001a]">
-        <span className="text-white font-bold">@2023 ASDEgypt</span>
-      </div>
+      <CopyRight />
     </div>
   );
 }

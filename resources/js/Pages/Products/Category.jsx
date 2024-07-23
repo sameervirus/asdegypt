@@ -1,6 +1,6 @@
 import AppLayout from "@/Layouts/AppLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   capitalizeEachWord,
   capitalizeFirstLetter,
@@ -10,6 +10,7 @@ import {
 import ProductHead from "@/Features/ProductHead";
 import ImageCard from "./ImageCard";
 import Tag from "./Tag";
+import { __ } from "@/Util/lang";
 
 function getDistinctObjects(array) {
   const uniqueIds = new Set();
@@ -25,6 +26,13 @@ function getDistinctObjects(array) {
 export default function Category({ agent_products }) {
   const { products, locale } = usePage().props;
   const categories = getDistinctObjects(products);
+
+  const [visibleProducts, setVisibleProducts] = useState(8);
+
+  const handleLoadMore = () => {
+    setVisibleProducts((prevCount) => prevCount + 8);
+  };
+
   return (
     <>
       <Head
@@ -105,21 +113,33 @@ export default function Category({ agent_products }) {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-12 lg:gap-4">
             <div className="col-span-6 lg:col-span-9">
-              <div className="grid grid-cols-2 lg:grid-cols-4 lg:gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                 {agent_products &&
-                  agent_products.map((c) =>
-                    c.fav_image !== null ? (
-                      <ImageCard
-                        key={c.id}
-                        locale={locale}
-                        url={`/products/${c.agent}/${c.category}/${c.model}`}
-                        favImage={c.fav_image}
-                        name={c.model}
-                        name_ar={c.model_ar}
-                      />
-                    ) : null,
-                  )}
+                  agent_products
+                    .slice(0, visibleProducts)
+                    .map((c) =>
+                      c.fav_image_thumbnail !== null ? (
+                        <ImageCard
+                          key={c.id}
+                          locale={locale}
+                          url={`/products/${c.agent}/${c.category}/${c.model}`}
+                          favImage={c.fav_image_thumbnail}
+                          name={c.model}
+                          name_ar={c.model_ar}
+                        />
+                      ) : null,
+                    )}
               </div>
+              {agent_products.length > visibleProducts && (
+                <div className="text-center mt-2">
+                  <button
+                    className="bg-primary py-2 px-4 text-white hover:bg-red-600"
+                    onClick={handleLoadMore}
+                  >
+                    {__("moreProducts")}
+                  </button>
+                </div>
+              )}
             </div>
             <Tag locale={locale} tags={getUniqueTags(agent_products)} />
           </div>

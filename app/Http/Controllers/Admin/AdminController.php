@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
- 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Admin\Product\Product;
@@ -18,10 +18,10 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function home_products()
     {
-    	return view('admin.products.home_products', [
+        return view('admin.products.home_products', [
             'products' => DB::table('home_products')->get()
         ]);
     }
@@ -31,25 +31,22 @@ class AdminController extends Controller
         $request->validate([
             'products' => 'required|array',
         ]);
-        if($request->products) {
-            foreach($request->products as $key => $p)
-            {
-                DB::table('home_products')->where('id', $key + 1)->update(['product_id'=> $p]);
+        if ($request->products) {
+            foreach ($request->products as $key => $p) {
+                DB::table('home_products')->where('id', $key + 1)->update(['product_id' => $p]);
             }
         }
-        flash()->overlay('Successfully Updated','Success');
+        flash()->overlay('Successfully Updated', 'Success');
         return redirect()->route('home_products');
-
     }
 
     public function index()
     {
-
     }
 
     public function upload_img(Request $request)
-    {     
-        $path = $request->file('file')->storeAs('files', $request->file('file')->getClientOriginalName(),'public_uploads');
+    {
+        $path = $request->file('file')->storeAs('files', $request->file('file')->getClientOriginalName(), 'uploads');
 
         return json_encode(['location' => $path]);
     }
@@ -60,7 +57,7 @@ class AdminController extends Controller
         foreach ($request->item as $value) {
             DB::table($request->table)
                 ->where('id', $value)
-                ->update(['sort_order' => $i]);            
+                ->update(['sort_order' => $i]);
             $i++;
         }
 
@@ -69,11 +66,11 @@ class AdminController extends Controller
 
     public function preorder(Request $request)
     {
-        $order = str_replace('^','-', json_encode($request->product));
+        $order = str_replace('^', '-', json_encode($request->product));
         DB::table('pages')
-                ->where('page', 'product_order')
-                ->update(['content' => $order]);        
-        
+            ->where('page', 'product_order')
+            ->update(['content' => $order]);
+
         return 1;
     }
 
@@ -124,20 +121,19 @@ class AdminController extends Controller
     public function feedbacks()
     {
         $items = \DB::table('feedbacks')->paginate(15);
-        return view('admin.feedbacks.index', compact('items')); 
+        return view('admin.feedbacks.index', compact('items'));
     }
 
     public function products_registration()
     {
         $registeredProducts = \DB::table('product_registration')->paginate(15);
-        return view('admin.register_products', compact('registeredProducts')); 
+        return view('admin.register_products', compact('registeredProducts'));
     }
 
     public function favimg(Request $request)
     {
         $product = Product::findOrFail($request->id);
-        foreach($product->getMedia('images') as $item)
-        {
+        foreach ($product->getMedia('images') as $item) {
             $item->forgetCustomProperty('fav');
             $item->save();
         }
@@ -150,5 +146,4 @@ class AdminController extends Controller
 
         return 'ok';
     }
-
 }
