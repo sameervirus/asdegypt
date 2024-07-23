@@ -74,7 +74,7 @@ export default function Agent({ agent_products }) {
                       key={c.id}
                       locale={locale}
                       url={`/products/${c.agent}/${c.category}`}
-                      favImage={c.category}
+                      favImage={`/images/${c.category}.png`}
                       name={c.category}
                       name_ar={c.category_ar}
                     />
