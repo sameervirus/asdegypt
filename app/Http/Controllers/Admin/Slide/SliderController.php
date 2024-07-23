@@ -46,46 +46,86 @@ class SliderController extends Controller
    */
   public function store(Request $request)
   {
-
     $order = Slider::max('sort');
-
     $order = $order + 1;
 
-    $massage = '';
+    $message = '';
 
-    $handle = new UploadClass($request->file('file'));
+    // Handle Desktop Image
+    $desktopFileName = '';
+    if ($request->hasFile('desktop_image')) {
+      $desktopFile = $request->file('desktop_image');
+      $desktopHandle = new UploadClass($desktopFile);
 
-    if ($handle->uploaded) {
-      $handle->image_resize         = true;
-      $handle->image_ratio_x        = true;
-      $handle->image_y              = 648;
-      $handle->process('images/slider');
+      if ($desktopHandle->uploaded) {
+        $desktopHandle->image_resize = true;
+        $desktopHandle->image_ratio_x = true;
+        $desktopHandle->image_y = 648;
+        $desktopHandle->process('images/slider');
 
-      if ($handle->processed) {
-        $massage = 'Successfully Added';
-        $file_name = $handle->file_dst_name;
-        $handle->clean();
-        $header = $caption = $header_ar = $caption_ar = '';
-        if ($request->filled('header'))  $header = $request->header;
-        if ($request->filled('header_ar'))  $header_ar = $request->header_ar;
-        if ($request->filled('caption'))  $caption = $request->caption;
-        if ($request->filled('caption_ar'))  $caption_ar = $request->caption_ar;
-
-        Slider::create([
-          'image' => $file_name,
-          'header' => $header,
-          'header_ar' => $header_ar,
-          'caption' => $caption,
-          'caption_ar' => $caption_ar,
-          'sort' => $order
-        ]);
+        if ($desktopHandle->processed) {
+          $desktopFileName = $desktopHandle->file_dst_name;
+          $desktopHandle->clean();
+        } else {
+          $message = 'Error processing desktop image: ' . $desktopHandle->error;
+          return back()->with('message', $message);
+        }
       } else {
-        $massage = 'error : ' . $handle->error;
+        $message = 'No desktop image uploaded.';
+        return back()->with('message', $message);
       }
     }
 
-    return back()->with('message', $massage);
+    // Handle Mobile Image
+    $mobileFileName = '';
+    if ($request->hasFile('mobile_image')) {
+      $mobileFile = $request->file('mobile_image');
+      $mobileHandle = new UploadClass($mobileFile);
+
+      if ($mobileHandle->uploaded) {
+        $mobileHandle->image_resize = true;
+        $mobileHandle->image_ratio_y = true;
+        $mobileHandle->image_x = 640;
+        $mobileHandle->process('images/slider');
+
+        if ($mobileHandle->processed) {
+          $mobileFileName = $mobileHandle->file_dst_name;
+          $mobileHandle->clean();
+        } else {
+          $message = 'Error processing mobile image: ' . $mobileHandle->error;
+          return back()->with('message', $message);
+        }
+      } else {
+        $message = 'No mobile image uploaded.';
+        return back()->with('message', $message);
+      }
+    }
+
+    // Default values if images are not uploaded
+    $desktopFileName = $desktopFileName ?: null;
+    $mobileFileName = $mobileFileName ?: null;
+
+    // Get other data from the request
+    $header = $request->filled('header') ? $request->header : '';
+    $header_ar = $request->filled('header_ar') ? $request->header_ar : '';
+    $caption = $request->filled('caption') ? $request->caption : '';
+    $caption_ar = $request->filled('caption_ar') ? $request->caption_ar : '';
+
+    // Create the slider
+    Slider::create([
+      'desktop_image' => $desktopFileName,
+      'mobile_image' => $mobileFileName,
+      'header' => $header,
+      'header_ar' => $header_ar,
+      'caption' => $caption,
+      'caption_ar' => $caption_ar,
+      'sort' => $order
+    ]);
+
+    $message = 'Successfully Added';
+    return back()->with('message', $message);
   }
+
 
   /**
    * Display the specified resource.
@@ -125,33 +165,55 @@ class SliderController extends Controller
     $slider->caption = $request->caption;
     $slider->caption_ar = $request->caption_ar;
 
-    if ($request->file('file')) {
+    // Handle Desktop Image
+    if ($request->file('desktop_image')) {
+      $desktopHandle = new UploadClass($request->file('desktop_image'));
 
-      $handle = new UploadClass($request->file('file'));
+      if ($desktopHandle->uploaded) {
+        $desktopHandle->image_resize = true;
+        $desktopHandle->image_ratio_x = true;
+        $desktopHandle->image_y = 648;
+        $desktopHandle->process('images/slider');
 
-      if ($handle->uploaded) {
-        $handle->image_resize         = true;
-        $handle->image_ratio_x        = true;
-        $handle->image_y              = 648;
-        $handle->process('images/slider');
-
-        if ($handle->processed) {
-          \File::delete('images/slider/' . $slider->image);
-          $massage = 'ok';
-          $slider->image = $handle->file_dst_name;
-          $handle->clean();
+        if ($desktopHandle->processed) {
+          \File::delete('images/slider/' . $slider->desktop_image);
+          $slider->desktop_image = $desktopHandle->file_dst_name;
+          $desktopHandle->clean();
         } else {
-          $massage = 'error : ' . $handle->error;
+          $message = 'Error processing desktop image: ' . $desktopHandle->error;
+          return back()->with('message', $message);
+        }
+      }
+    }
+
+    // Handle Mobile Image
+    if ($request->file('mobile_image')) {
+      $mobileHandle = new UploadClass($request->file('mobile_image'));
+
+      if ($mobileHandle->uploaded) {
+        $mobileHandle->image_resize = true;
+        $mobileHandle->image_ratio_y = true;
+        $mobileHandle->image_x = 640;
+        $mobileHandle->process('images/slider');
+
+        if ($mobileHandle->processed) {
+          \File::delete('images/slider/' . $slider->mobile_image);
+          $slider->mobile_image = $mobileHandle->file_dst_name;
+          $mobileHandle->clean();
+        } else {
+          $message = 'Error processing mobile image: ' . $mobileHandle->error;
+          return back()->with('message', $message);
         }
       }
     }
 
     $slider->save();
 
-    $massage = 'Successfully Updated';
+    $message = 'Successfully Updated';
 
-    return back()->with('message', $massage);
+    return back()->with('message', $message);
   }
+
 
   /**
    * Remove the specified resource from storage.
@@ -161,10 +223,14 @@ class SliderController extends Controller
    */
   public function destroy($id)
   {
-    //
     $slider = Slider::findOrFail($id);
-    \File::delete('images/slider/' . $slider->image);
-    Slider::findOrFail($id)->delete();
+
+    // Delete desktop and mobile images
+    \File::delete('images/slider/' . $slider->desktop_image);
+    \File::delete('images/slider/' . $slider->mobile_image);
+
+    // Delete the slider record from the database
+    $slider->delete();
 
     return back()->with('message', 'Successfully Deleted!');
   }

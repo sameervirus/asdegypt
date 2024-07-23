@@ -12,7 +12,9 @@ export default function Welcome({ sliders, pages, features }) {
     <>
       <Head title="Home" />
       <HomeLayout>
-        <MainSlider2 sliders={sliders} />
+        <div className="home-content">
+          <MainSlider2 sliders={sliders} />
+        </div>
         {/* <RedBanner pages={pages} />
         <FeatureProducts features={features} />
         <ServiceSection /> */}

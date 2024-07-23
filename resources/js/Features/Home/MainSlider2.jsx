@@ -3,12 +3,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { usePage } from "@inertiajs/react";
-import { __ } from "@/Util/lang";
 import { Autoplay } from "swiper/modules";
 
 export default function MainSlider2({ sliders }) {
   const { locale } = usePage().props;
   const swiperRef = useRef(null);
+
+  const isMobile = () => {
+    return window.innerWidth <= 768; // Define your mobile width threshold
+  };
 
   return (
     <div className="slide-warp">
@@ -27,7 +30,9 @@ export default function MainSlider2({ sliders }) {
               {({ isActive }) => (
                 <div
                   style={{
-                    backgroundImage: `url(https://app.asdegypt.com/images/slider/${slide.image})`,
+                    backgroundImage: `url(https://app.asdegypt.com/images/slider/${
+                      isMobile() ? slide.mobile_image : slide.desktop_image
+                    })`,
                     display: "block",
                   }}
                   className="clone"

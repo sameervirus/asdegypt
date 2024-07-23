@@ -6,8 +6,8 @@ import React from "react";
 
 export default function MobileMenu({ setMenuPanel }) {
   return (
-    <div className="w-full px-2 py-1 rtl:ps-4 ltr:pe-4 bg-gray-100">
-      <div className="flex justify-between bg-white">
+    <div className="bg-gray-100 rtl:ps-4 w-full">
+      <div className="bg-white flex justify-between px-2">
         <div className="">
           <ApplicationLogo />
         </div>
@@ -42,7 +42,7 @@ export default function MobileMenu({ setMenuPanel }) {
         <LanguageSwitcher />
       </div>
       <div className="mb-4">
-        <div className="bg-white text-gray-500">
+        <div className="bg-white text-gray-500 px-2">
           <strong className="text-[12px]">{__("Products")}</strong>
         </div>
 
@@ -59,7 +59,7 @@ export default function MobileMenu({ setMenuPanel }) {
         </ul>
       </div>
       <div className="mb-4">
-        <div className="bg-white text-gray-500">
+        <div className="bg-white text-gray-500 px-2">
           <strong className="text-[12px]">{__("Company")}</strong>
         </div>
 

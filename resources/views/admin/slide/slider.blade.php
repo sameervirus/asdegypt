@@ -6,38 +6,38 @@
 <!-- Switchery -->
 <link href="{{asset('vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
 <style type="text/css">
-  .inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
 
-  .inputfile+label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-    padding: 0 20px;
-  }
+.inputfile+label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  padding: 0 20px;
+}
 
-  .inputfile:focus+label,
-  .inputfile+label:hover {
-    background-color: red;
-  }
+.inputfile:focus+label,
+.inputfile+label:hover {
+  background-color: red;
+}
 
-  .inputfile+label {
-    cursor: pointer;
-    /* "hand" cursor */
-  }
+.inputfile+label {
+  cursor: pointer;
+  /* "hand" cursor */
+}
 
-  .thumbnail .image {
-    height: auto !important;
-    min-height: 120px;
-  }
+.thumbnail .image {
+  height: auto !important;
+  min-height: 120px;
+}
 </style>
 @endsection
 
@@ -63,7 +63,8 @@
     <div class="clearfix"></div>
     @if (session('message'))
     <div id="back-message" class="alert alert-success alert-dismissible fade in" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">×</span></button>
       <strong>Oh yeah!</strong> {{session('message')}}
     </div>
     @endif
@@ -82,7 +83,8 @@
         <div class="x_panel">
           <div class="x_title">
             <h2>Slider Images <small>Change and Sort the sliders</small></h2>
-            <a href="#newModal" class="btn btn-default pull-right" data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span> Add New Slide</a>
+            <a href="#newModal" class="btn btn-default pull-right" data-toggle="modal"><span
+                class="glyphicon glyphicon-plus-sign"></span> Add New Slide</a>
             <div class="clearfix"></div>
           </div>
           @if (count($slider) > 0)
@@ -103,38 +105,53 @@
                     <div class="block_content">
                       <div class="thumbnail">
                         <div class="image view view-first">
-                          <img style="width: 100%; display: block;" src="{{asset('images/slider/'. $slide->image )}}" alt="image" id="{{$slide->id}}">
+                          <picture>
+                            <source srcset="{{ asset('images/slider/' . $slide->mobile_image) }}"
+                              media="(max-width: 768px)">
+                            <img style="width: 100%; display: block;"
+                              src="{{ asset('images/slider/' . $slide->desktop_image) }}" alt="image"
+                              id="{{ $slide->id }}">
+                          </picture>
                           <div class="mask no-caption">
                             <div class="tools tools-bottom">
-                              <input type="file" name="file" id="file_{{$slide->id}}" data-id="{{$slide->id}}" class="inputfile" />
-                              <label for="file_{{$slide->id}}">Change Image</label>
+                              <input type="file" name="desktop_image" id="desktop_file_{{ $slide->id }}"
+                                data-id="{{ $slide->id }}" class="inputfile">
+                              <label for="desktop_file_{{ $slide->id }}">Change Desktop Image</label>
+                              <input type="file" name="mobile_image" id="mobile_file_{{ $slide->id }}"
+                                data-id="{{ $slide->id }}" class="inputfile">
+                              <label for="mobile_file_{{ $slide->id }}">Change Mobile Image</label>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div id="data_{{ $slide->id}}">
+                      <div id="data_{{ $slide->id }}">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                          <textarea type="textarea" name="header" placeholder="Title" class="form-control">{{ $slide->header }}</textarea>
-                          <textarea type="textarea" name="header_ar" placeholder="العنوان" class="form-control">{{ $slide->header_ar }}</textarea>
+                          <textarea type="textarea" name="header" placeholder="Title"
+                            class="form-control">{{ $slide->header }}</textarea>
+                          <textarea type="textarea" name="header_ar" placeholder="العنوان"
+                            class="form-control">{{ $slide->header_ar }}</textarea>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                          <textarea type="textarea" name="caption" placeholder="Title 2" class="form-control">{{ $slide->caption }}</textarea>
-                          <textarea type="textarea" name="caption_ar" placeholder="الوصف" class="form-control">{{ $slide->caption_ar }}</textarea>
+                          <textarea type="textarea" name="caption" placeholder="Title 2"
+                            class="form-control">{{ $slide->caption }}</textarea>
+                          <textarea type="textarea" name="caption_ar" placeholder="الوصف"
+                            class="form-control">{{ $slide->caption_ar }}</textarea>
                         </div>
                       </div>
                       <div class="clearfix"></div>
                       <div class="modal-footer">
-                        <a class="btn btn-danger" onclick="event.preventDefault();
-                              document.getElementById('del_{{$slide->id}}').click();">Delete</a>
+                        <a class="btn btn-danger"
+                          onclick="event.preventDefault(); document.getElementById('del_{{ $slide->id }}').click();">Delete</a>
                         <button type="submit" class="btn btn-primary" data-id="{{ $slide->id }}">Save</button>
                       </div>
                     </div>
                   </div>
                 </form>
-                <form method="POST" action="{{ route('slider.destroy', $slide->id) }}" onsubmit="return confirm('هل تريد حقاً حذف هذا slide?');">
+                <form method="POST" action="{{ route('slider.destroy', $slide->id) }}"
+                  onsubmit="return confirm('هل تريد حقاً حذف هذا slide?');">
                   @method('DELETE')
                   @csrf
-                  <button type="submit" class="hidden" id="del_{{$slide->id}}">Delete</button>
+                  <button type="submit" class="hidden" id="del_{{ $slide->id }}">Delete</button>
                 </form>
               </li>
               @endforeach
@@ -149,7 +166,8 @@
     <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form id="add-menu" action="{{url('admin/slider')}}" class="form-horizontal form-label-left" method="POST" enctype="multipart/form-data">
+          <form id="add-menu" action="{{url('admin/slider')}}" class="form-horizontal form-label-left" method="POST"
+            enctype="multipart/form-data">
             {{ csrf_field() }}
             <input id="to_change" type="hidden" name="_method" value="POST">
 
@@ -188,22 +206,22 @@
 <!-- Switchery -->
 <script src="{{asset('vendors/switchery/dist/switchery.min.js')}}"></script>
 <script type="text/javascript">
-  function readURL(input, id) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+function readURL(input, id) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-      reader.onload = function(e) {
-        $('#' + id).attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
+    reader.onload = function(e) {
+      $('#' + id).attr('src', e.target.result);
     }
-  }
 
-  $(".inputfile").change(function() {
-    var img = $(this).data('id');
-    readURL(this, img);
-  });
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$(".inputfile").change(function() {
+  var img = $(this).data('id');
+  readURL(this, img);
+});
 </script>
 
 @endsection
