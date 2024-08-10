@@ -40,7 +40,7 @@
   text-transform: uppercase;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   transition: all 0.3s ease-in;
   position: relative;
 }
@@ -103,9 +103,9 @@
   color: #000 !important;
   border-bottom-color: rgba(0, 0, 0, 0) !important;
   display: block !important;
-  text-transform: none !important;
+  text-transform: uppercase;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   padding: 3px 0 0 0 !important;
 }
 

@@ -60,7 +60,7 @@ class SliderController extends Controller
       if ($desktopHandle->uploaded) {
         $desktopHandle->image_resize = true;
         $desktopHandle->image_ratio_x = true;
-        $desktopHandle->image_y = 648;
+        $desktopHandle->image_y = 720;
         $desktopHandle->process('images/slider');
 
         if ($desktopHandle->processed) {
