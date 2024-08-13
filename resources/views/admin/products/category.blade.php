@@ -147,7 +147,7 @@
                                                 <td>{{ Str::title(str_replace('_', ' ', $category->category))}}</td>
                                                 <td>
                                                     @php
-                                                        $imageUrl = '/images/' . $category->category . '.png';
+                                                        $imageUrl = '/images/' . $category->agent . '_' . $category->category . '.png';
                                                     @endphp
                                                     @if (file_exists(public_path($imageUrl)))
                                                         <img src="{{ asset($imageUrl) }}?v={{ time() }}" alt="Category Image" class="img-thumbnail">
@@ -156,7 +156,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#replaceImageModal" data-agent-id="{{$category->category}}">Replace Image</button>
+                                                    <button class="btn btn-primary" data-toggle="modal" data-target="#replaceImageModal" data-agent-id="{{$category->agent . '_' . $category->category}}">Replace Image</button>
                                                 </td>
                                             </tr>
                                         @endforeach                                          
