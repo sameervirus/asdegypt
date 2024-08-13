@@ -256,4 +256,19 @@
          });
     </script>
 
+    <script>
+        var categories = @json(\App\Admin\Product\Product::groupBy('category')->select('id', 'agent', 'category' )->get());
+        var categoriesElement = $("#categories");
+        var selectCategories = [];
+        function filterCategories(e) {
+            if(e) {
+                selectCategories = categories.filter((c) => c.agent === e);
+                categoriesElement.html(selectCategories.map((c) => `<option value="${c.category}" />`))
+            } else {
+                categoriesElement.html('')
+            }
+        }
+        
+    </script>
+
 @endsection

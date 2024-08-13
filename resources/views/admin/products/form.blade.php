@@ -1,16 +1,30 @@
 <div class="form-group">
-    <label for="categroy" class="col-md-2 control-label">Categroy</label>
-
+    <label for="agent" class="col-md-2 control-label">Agent</label>
     <div class="col-md-5">
-        <select class="form-control" id="categroy" name="category" required>
-            <option>Choose Categroy</option>
-            @foreach(\App\Admin\Product\Product::groupBy('category')->select('category')->get() as $category)
-            <option value="{{$category->category}}" {{ @$item && $item->category == $category->category ? 'selected' : '' }}>{{ \Str::title(str_replace('_', ' ', $category->category)) }}</option>
+        <input type="text" class="form-control" list="agents" id="agent" name="agent" required placeholder="Choose Agent or add" value="{{ $item->agent ?? '' }}" {{ @$item && $item->agent ? 'disabled' : '' }} oninput="filterCategories(this.value)">
+        <datalist id="agents">
+            @foreach(\App\Admin\Product\Product::groupBy('agent')->select('agent')->get() as $agent)
+                <option value="{{$agent->agent}}" {{ @$item && $item->agent == $agent->agent ? 'selected' : '' }} />
             @endforeach
-        </select>        
+        </datalist>
+        <p class="form-helper">Ex: ITAL GARAGE = ital_garage</p>
     </div>
     <div class="col-md-5">
-        <input type="text" class="form-control" name="category_ar" required placeholder="التصنيف" value="{{ $item->category_ar ?? '' }}">
+        <input type="text" class="form-control" name="agent_ar" required placeholder="الوكيل" value="{{ $item->agent_ar ?? '' }}" {{ @$item && $item->agent ? 'disabled' : '' }}>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="category" class="col-md-2 control-label">Category</label>
+    <div class="col-md-5">
+        <input type="text" class="form-control" list="categories" id="category" name="category" required placeholder="Choose Category" value="{{ $item->category ?? '' }}">
+        <datalist id="categories">
+            
+        </datalist>
+        <p class="form-helper">Ex: Carpet Cleaner = carpet_cleaner</p>
+    </div>
+    <div class="col-md-5">
+        <input type="text" class="form-control" id="category_ar" name="category_ar" required placeholder="التصنيف" value="{{ $item->category_ar ?? '' }}">
     </div>
 </div>
 

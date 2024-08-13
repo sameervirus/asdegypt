@@ -260,4 +260,17 @@
         }
       });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            var categories = @json(\App\Admin\Product\Product::groupBy('category')->select('id', 'agent', 'category' )->get());
+            var item = @json(@$item);
+            var categoriesElement = $("#categories");
+            var selectCategories = [];
+            if(item) {
+              selectCategories = categories.filter((c) => c.agent === item.agent);
+              categoriesElement.html(selectCategories.map((c) => `<option value="${c.category}" ${item && item.category == c.category ? 'selected' : ''} />`))
+            }
+        });
+    </script>
 @endsection

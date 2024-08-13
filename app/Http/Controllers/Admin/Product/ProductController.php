@@ -50,6 +50,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'agent'  => 'required',
             'category'  => 'required',
             'model'     => 'required',
             'features'  => 'required',
@@ -57,7 +58,9 @@ class ProductController extends Controller
         ]);
 
         $product = Product::create([
-            'category' => $request->category,
+            'agent' => Str::slug($request->agent),
+            'agent_ar' => $request->agent_ar,
+            'category' => Str::slug($request->category),
             'category_ar' => $request->category_ar,
             'model' => Str::slug($request->model),
             'model_ar' => $request->model_ar,
@@ -137,8 +140,7 @@ class ProductController extends Controller
             'features'  => 'required',
             'features_ar' => 'required'
         ]);
-        
-        
+
         $item->category = $request->category;
         $item->category_ar = $request->category_ar;
         $item->model = Str::slug($request->model);
