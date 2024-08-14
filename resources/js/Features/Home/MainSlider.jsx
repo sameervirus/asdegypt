@@ -33,7 +33,7 @@ export default function MainSlider({ sliders }) {
               <img
                 width="500px"
                 height="500px"
-                src={`https://app.asdegypt.com/images/slider/${slide.image}`}
+                src={`https://asdegypt.com/images/slider/${slide.image}`}
               />
               <div className="mt-[70px] lg:mt-[140px] ms-[40px] lg:ms-[70px] p-5 lg:p-10 text-start rtl:text-right">
                 <h2 className="text-xl lg:text-4xl uppercase mb-4">

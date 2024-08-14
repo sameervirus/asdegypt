@@ -31,7 +31,7 @@ export default function News({ news }) {
 
         <div className="container lg:my-24 mx-auto md:px-6">
           <section className="lg:mb-32 text-center">
-            <div className="grid gap-6 lg:grid-cols-3 xl:gap-x-12 p-4">
+            <div className="grid gap-6 lg:grid-cols-3 xl:gap-x-12 p-4 items-center">
               {news &&
                 news.map((post) => (
                   <div key={post.id} className="mb-6 lg:mb-0">

@@ -10,7 +10,7 @@ export default function ApplicationLogo(props) {
     <Link {...props} href="/">
       <img
         className="h-[70px] lg:h-[100px]"
-        src={`https://app.asdegypt.com/images/${getContentItem("logo")}`}
+        src={`https://asdegypt.com/images/${getContentItem("logo")}`}
       />
     </Link>
   );

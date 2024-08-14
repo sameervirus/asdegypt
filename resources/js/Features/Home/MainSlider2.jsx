@@ -30,7 +30,7 @@ export default function MainSlider2({ sliders }) {
               {({ isActive }) => (
                 <div
                   style={{
-                    backgroundImage: `url(https://app.asdegypt.com/images/slider/${
+                    backgroundImage: `url(https://asdegypt.com/images/slider/${
                       isMobile() ? slide.mobile_image : slide.desktop_image
                     })`,
                     display: "block",

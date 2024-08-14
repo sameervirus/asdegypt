@@ -27,7 +27,7 @@ export default function Products() {
 
         <div className="container lg:my-24 mx-auto md:px-6">
           <section className="lg:mb-32 text-center">
-            <div className="grid gap-6 lg:grid-cols-4 xl:gap-x-12 p-4">
+            <div className="grid gap-6 lg:grid-cols-4 xl:gap-x-12 p-4 items-center">
               {agents &&
                 agents.map((agent) => (
                   <div key={agent.id} className="mb-6 lg:mb-0">
